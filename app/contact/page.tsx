@@ -1,0 +1,7 @@
+import { ArrowUpRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { ContactForm } from '@/components/contact-form'
+import { PageHero, SiteShell } from '@/components/site'
+import { pageMetadata } from '@/lib/metadata'
+export const metadata=pageMetadata('Contact VectorShip AI Solutions','Start a technical conversation about what you are building, automating, improving, or solving.','/contact')
+export default function Contact(){return <SiteShell><main><PageHero title="Let&apos;s talk about what you&apos;re building." copy="Tell us what you&apos;re trying to build, automate, improve, or solve. We&apos;ll come prepared to discuss the technical path forward."/><section className="section shell contact-grid"><div><p className="eyebrow">PROJECT INQUIRY</p><ContactForm /></div><aside className="booking-card"><p className="eyebrow">CALENDAR</p><h2>Technical Architecture Review</h2><strong>15 minutes</strong><p className="card-copy">A short conversation to understand your challenge and determine whether VectorShip is the right technical partner.</p><div className="calendar-placeholder"><span>CALENDLY_EMBED_URL</span><small>Replace this placeholder with your Calendly embed URL.</small></div><a href="mailto:hello@vectorship.ai?subject=Architecture%20Review" className="button-primary mt-6 inline-flex h-12 w-full items-center justify-center rounded-sm">Request a Time <ArrowUpRight className="ml-2 size-4" /></a></aside></section></main></SiteShell>}

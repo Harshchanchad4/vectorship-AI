@@ -1,0 +1,5 @@
+import { pageMetadata } from '@/lib/metadata'
+import { CardGrid, CTA, PageHero, SectionHeading, SiteShell } from '@/components/site'
+import { solutionLinks } from '@/lib/site-data'
+export const metadata = pageMetadata('Technology Solutions','Practical AI, software, mobile, and cloud solutions aligned to the problem you are solving.','/solutions')
+export default function Solutions(){return <SiteShell><main><PageHero title="The right technology for the problem you&apos;re actually solving." copy="We do not force clients into a stack or a trend. We start with the outcome, then choose the strategy, architecture, and engineering path that makes sense." /><section className="section shell"><div className="solution-flow">Problem <span>→</span> Strategy <span>→</span> Architecture <span>→</span> Engineering <span>→</span> Deployment <span>→</span> Optimization</div><SectionHeading eyebrow="SOLUTION AREAS" title="Focused capabilities. No technology theater." /><div className="mt-12"><CardGrid items={solutionLinks} /></div></section><CTA /></main></SiteShell>}

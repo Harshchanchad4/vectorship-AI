@@ -1,0 +1,1 @@
+1. do full repo scan, or directly connect playwright and start scaning full website, and fix UI changes.there are so many UI inconsitencies are there. so fix it.
