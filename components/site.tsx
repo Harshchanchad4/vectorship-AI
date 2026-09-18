@@ -10,7 +10,7 @@ export const navItems = [
   ['Services', '/services'], ['Solutions', '/solutions'], ['Approach', '/approach'], ['Work', '/work'], ['About', '/about'],
 ]
 
-export function Logo() { return <Link href="/" className="flex items-center gap-3" aria-label="VectorShip home"><span className="logo-mark"><span /><span /></span><span className="text-[15px] font-semibold tracking-[-0.03em] text-foreground">VectorShip</span></Link> }
+export function Logo() { return <Link href="/" className="flex items-center gap-2.5" aria-label="VectorShip home"><svg className="logo-mark" width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><linearGradient id="vs-logo-g" x1="0" y1="32" x2="32" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#308DFF" /><stop offset="1" stopColor="#65E2E0" /></linearGradient></defs><rect x="1" y="1" width="30" height="30" rx="8.5" fill="#0d1219" stroke="url(#vs-logo-g)" strokeOpacity="0.4" /><path d="M8.5 9 L15.5 22 L23.5 6.5" stroke="url(#vs-logo-g)" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" /><path d="M18.5 7.4 L23.5 6.5 L22.8 11.6" fill="none" stroke="url(#vs-logo-g)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /></svg><span className="text-[15px] font-semibold tracking-[-0.03em] text-foreground">VectorShip</span></Link> }
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
