@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Plus } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 
 export function Faq({ items }: { items: [string, string][] }) {
   const [open, setOpen] = useState<number | null>(0)
@@ -16,11 +16,12 @@ export function Faq({ items }: { items: [string, string][] }) {
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? null : i)}
             >
-              <span>{question}</span>
-              <Plus className="faq-icon size-5 shrink-0" aria-hidden="true" />
+              <span className="faq-num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="faq-q-text">{question}</span>
+              <span className="faq-icon-ring" aria-hidden="true"><ChevronDown className="faq-icon" /></span>
             </button>
-            <div className="faq-answer" hidden={!isOpen}>
-              <p>{answer}</p>
+            <div className="faq-answer-panel" style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}>
+              <div className="faq-answer-inner"><p>{answer}</p></div>
             </div>
           </div>
         )

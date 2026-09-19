@@ -2,7 +2,10 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
+import { Space_Grotesk } from 'next/font/google'
 import './globals.css'
+
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--font-space-grotesk' })
 
 export const metadata: Metadata = {
   title: 'VectorShip AI Solutions | AI Software Development Company',
@@ -62,7 +65,7 @@ const jsonLd = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`bg-background ${GeistSans.variable} ${GeistMono.variable}`}><body className="antialiased">
+  return <html lang="en" className={`bg-background ${GeistSans.variable} ${GeistMono.variable} ${spaceGrotesk.variable}`}><body className="antialiased">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     {children}{process.env.NODE_ENV === 'production' && <Analytics />}
   </body></html>
