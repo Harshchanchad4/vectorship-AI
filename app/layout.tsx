@@ -8,12 +8,12 @@ import './globals.css'
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--font-space-grotesk' })
 
 export const metadata: Metadata = {
-  title: 'VectorShip AI Solutions | AI Software Development Company',
-  description: 'VectorShip is an AI software development company helping ambitious companies design, build, automate, and scale high-performance digital products.',
+  title: 'Nexio AI Solutions | AI Software Development Company',
+  description: 'Nexio is an AI software development company helping ambitious companies design, build, automate, and scale high-performance digital products.',
   metadataBase: new URL('https://vectorship.ai'),
   alternates: { canonical: 'https://vectorship.ai' },
-  openGraph: { title: 'VectorShip AI Solutions | AI Software Development Company', description: 'Senior engineering for AI automation, software, mobile, and cloud DevOps.', type: 'website', url: 'https://vectorship.ai', siteName: 'VectorShip AI Solutions' },
-  twitter: { card: 'summary_large_image', title: 'VectorShip AI Solutions | AI Software Development Company', description: 'Senior engineering for AI automation, software, mobile, and cloud DevOps.' },
+  openGraph: { title: 'Nexio AI Solutions | AI Software Development Company', description: 'Senior engineering for AI automation, software, mobile, and cloud DevOps.', type: 'website', url: 'https://vectorship.ai', siteName: 'Nexio AI Solutions' },
+  twitter: { card: 'summary_large_image', title: 'Nexio AI Solutions | AI Software Development Company', description: 'Senior engineering for AI automation, software, mobile, and cloud DevOps.' },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-icon.png',
   },
-  generator: 'VectorShip AI Solutions',
+  generator: 'Nexio AI Solutions',
 }
 
 export const viewport: Viewport = {
@@ -36,10 +36,10 @@ const jsonLd = {
     {
       '@type': 'Organization',
       '@id': 'https://vectorship.ai/#organization',
-      name: 'VectorShip AI Solutions',
+      name: 'Nexio AI Solutions',
       url: 'https://vectorship.ai',
       logo: 'https://vectorship.ai/icon.svg',
-      description: 'VectorShip helps ambitious companies design, build, automate, and scale high-performance digital products with senior software engineering, AI automation, mobile, and cloud DevOps expertise.',
+      description: 'Nexio helps ambitious companies design, build, automate, and scale high-performance digital products with senior software engineering, AI automation, mobile, and cloud DevOps expertise.',
       email: 'hello@vectorship.ai',
       sameAs: [],
     },
@@ -47,13 +47,13 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': 'https://vectorship.ai/#website',
       url: 'https://vectorship.ai',
-      name: 'VectorShip AI Solutions',
+      name: 'Nexio AI Solutions',
       publisher: { '@id': 'https://vectorship.ai/#organization' },
     },
     {
       '@type': 'ProfessionalService',
       '@id': 'https://vectorship.ai/#service',
-      name: 'VectorShip AI Solutions',
+      name: 'Nexio AI Solutions',
       image: 'https://vectorship.ai/icon.svg',
       url: 'https://vectorship.ai',
       priceRange: '$$',

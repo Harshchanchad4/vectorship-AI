@@ -73,11 +73,11 @@ export const siteOverview = [
   { label: 'APPROACH', title: 'A delivery process built to stay honest.', copy: 'The five stages we run every engagement through, and how we keep communication clear along the way.', href: '/approach', cta: 'See our approach' },
   { label: 'WORK', title: 'The kinds of problems we take on.', copy: 'A look at the engagements we support while our public case study library comes together.', href: '/work', cta: 'See our work' },
   { label: 'RECRUITMENT', title: 'Need to grow your own team instead?', copy: 'How we help you hire vetted software, AI, and cloud talent—permanent, contract, or contract-to-hire.', href: '/recruitment', cta: 'See recruitment' },
-  { label: 'ABOUT', title: 'Who is actually behind the work.', copy: 'The team, the standards, and the reasoning behind how VectorShip operates as a partner.', href: '/about', cta: 'See about us' },
+  { label: 'ABOUT', title: 'Who is actually behind the work.', copy: 'The team, the standards, and the reasoning behind how Nexio operates as a partner.', href: '/about', cta: 'See about us' },
 ]
 
 export const serviceFaqs: [string, string][] = [
-  ['What does a software development company like VectorShip actually do?', 'We design, build, and scale custom software—web platforms, mobile apps, AI agents, data pipelines, and cloud infrastructure—for startups and growing companies that need a senior engineering partner.'],
+  ['What does a software development company like Nexio actually do?', 'We design, build, and scale custom software—web platforms, mobile apps, AI agents, data pipelines, and cloud infrastructure—for startups and growing companies that need a senior engineering partner.'],
   ['What technologies and programming languages do you work with?', 'A broad, modern stack: TypeScript, JavaScript, Python, Go, Rust, Java, Kotlin, and Swift, with frameworks like React, Next.js, Node.js, Django, and FastAPI. We choose the right tool for the problem rather than forcing a single stack.'],
   ['Do you specialize in AI agents and LLM applications?', 'Yes—AI agents are a core specialty. We build autonomous agents, multi-agent systems, RAG pipelines, copilots, and tool-using agents on OpenAI, Anthropic, and open-source models, with evaluation, guardrails, and observability built in.'],
   ['How large is your engineering team, and how do you staff projects?', 'We are a collective of senior engineers across frontend, backend, mobile, AI, data, and DevOps. We staff each project with the specific specialists it needs—no junior bench, no unnecessary layers.'],

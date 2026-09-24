@@ -1,6 +1,6 @@
 import { pageMetadata } from '@/lib/metadata'
 import { PageHero, SiteShell } from '@/components/site'
-export const metadata=pageMetadata('Privacy Policy','A placeholder privacy policy for VectorShip AI Solutions, pending legal review.','/privacy')
+export const metadata=pageMetadata('Privacy Policy','A placeholder privacy policy for Nexio AI Solutions, pending legal review.','/privacy')
 const sections: [string, string][] = [
   ['Information we collect','We may collect information you submit through the contact form, such as your name, work email, company, and project context.'],
   ['How we use information','Information is used to respond to inquiries, understand project needs, and communicate about requested services.'],

@@ -118,7 +118,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const item = data[slug]
-  if (!item) return pageMetadata('Solutions', 'VectorShip solution capabilities and engineering services.', '/solutions/' + slug)
+  if (!item) return pageMetadata('Solutions', 'Nexio solution capabilities and engineering services.', '/solutions/' + slug)
   return pageMetadata(item.seoTitle, item.seoDescription, '/solutions/' + slug)
 }
 
@@ -131,7 +131,7 @@ export default async function SolutionDetail({ params }: { params: Promise<{ slu
     name: item.seoTitle,
     description: item.seoDescription,
     serviceType: item.seoTitle,
-    provider: { '@type': 'Organization', name: 'VectorShip AI Solutions', url: 'https://vectorship.ai' },
+    provider: { '@type': 'Organization', name: 'Nexio AI Solutions', url: 'https://vectorship.ai' },
     areaServed: 'Worldwide',
     url: `https://vectorship.ai/solutions/${slug}`,
     hasOfferCatalog: {

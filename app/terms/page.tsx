@@ -1,8 +1,8 @@
 import { pageMetadata } from '@/lib/metadata'
 import { PageHero, SiteShell } from '@/components/site'
-export const metadata=pageMetadata('Terms of Service','Placeholder terms of service for VectorShip AI Solutions, pending legal review.','/terms')
+export const metadata=pageMetadata('Terms of Service','Placeholder terms of service for Nexio AI Solutions, pending legal review.','/terms')
 const sections: [string, string][] = [
-  ['Use of this website','This website provides general information about VectorShip AI Solutions and is not a binding statement of scope, pricing, or deliverables.'],
+  ['Use of this website','This website provides general information about Nexio AI Solutions and is not a binding statement of scope, pricing, or deliverables.'],
   ['Project agreements','Services, deliverables, intellectual property, confidentiality, payment, and support terms should be defined in a written agreement for each engagement.'],
   ['Content accuracy','We aim to keep the site clear and current, but content may change as the company and its services evolve.'],
   ['Legal review required','This is not legal advice or a final terms document. Replace this content before publishing.'],

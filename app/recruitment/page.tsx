@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/metadata'
 
 export const metadata = pageMetadata(
   'Tech Recruitment & IT Staffing',
-  'VectorShip Talent places senior software, AI, cloud, product, and leadership talent through permanent, contract, and contract-to-hire staffing—vetted by engineers.',
+  'Nexio Talent places senior software, AI, cloud, product, and leadership talent through permanent, contract, and contract-to-hire staffing—vetted by engineers.',
   '/recruitment',
 )
 
@@ -73,7 +73,7 @@ export default function Recruitment() {
 
         <section className="section approach-section">
           <div className="shell">
-            <SectionHeading eyebrow="WHY VECTORSHIP TALENT" title="A recruitment partner that understands the work you're hiring for." copy="We build software ourselves. That means we know what great engineers look like—and we screen for it." />
+            <SectionHeading eyebrow="WHY NEXIO TALENT" title="A recruitment partner that understands the work you're hiring for." copy="We build software ourselves. That means we know what great engineers look like—and we screen for it." />
             <div className="mt-12 grid gap-x-8 gap-y-10 md:grid-cols-2">
               {whyPartner.map(([title, copy, Icon]) => (
                 <article className="why-item" key={title}>
@@ -103,7 +103,7 @@ export default function Recruitment() {
 
         <section className="section approach-section">
           <div className="shell">
-            <SectionHeading eyebrow="FAQ" title="Common questions about hiring through VectorShip Talent." />
+            <SectionHeading eyebrow="FAQ" title="Common questions about hiring through Nexio Talent." />
             <Faq items={recruitmentFaqs} />
           </div>
         </section>

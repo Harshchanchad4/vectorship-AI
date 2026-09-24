@@ -23,7 +23,7 @@ export default function Services() {
   return (
     <SiteShell>
       <main>
-        <PageHero title="Software engineering & AI development services built for real business problems." copy="VectorShip provides end-to-end AI development, software engineering, mobile, and cloud DevOps services for teams that need clarity, speed, and ownership from idea through production." />
+        <PageHero title="Software engineering & AI development services built for real business problems." copy="Nexio provides end-to-end AI development, software engineering, mobile, and cloud DevOps services for teams that need clarity, speed, and ownership from idea through production." />
 
         <section className="section shell">
           <SectionHeading eyebrow="WHAT WE DO" title="A senior software engineering partner for the work that matters." />
