@@ -25,12 +25,12 @@ export default function Services() {
       <main>
         <PageHero title="Software engineering & AI development services built for real business problems." copy="Nexio provides end-to-end AI development, software engineering, mobile, and cloud DevOps services for teams that need clarity, speed, and ownership from idea through production." />
 
-        <section className="section shell">
+        <section id="capabilities" className="section shell">
           <SectionHeading eyebrow="WHAT WE DO" title="A senior software engineering partner for the work that matters." />
           <div className="mt-12"><CardGrid items={serviceLinks} /></div>
         </section>
 
-        <section className="section approach-section">
+        <section id="technology" className="section approach-section">
           <div className="shell">
             <SectionHeading eyebrow="TECHNOLOGY" title="Deep expertise across the full modern stack." copy="Our team spans every layer of modern software—languages, frameworks, AI, data, and infrastructure. We choose technology based on the problem, not the trend." />
             <div className="tech-grid mt-12">
@@ -44,7 +44,7 @@ export default function Services() {
           </div>
         </section>
 
-        <section className="section shell">
+        <section id="engagement" className="section shell">
           <SectionHeading eyebrow="HOW WE ENGAGE" title="Flexible engagement models, consistent ownership." />
           <div className="mt-12 grid gap-4 md:grid-cols-2">
             {engagementModels.map(([title, copy]) => (
@@ -57,7 +57,7 @@ export default function Services() {
           <Link href="/contact" className="card-link">Tell us what you&apos;re building <span>→</span></Link>
         </section>
 
-        <section className="section approach-section">
+        <section id="faq" className="section approach-section">
           <div className="shell">
             <SectionHeading eyebrow="FAQ" title="Common questions about working with a software development company." />
             <Faq items={serviceFaqs} />

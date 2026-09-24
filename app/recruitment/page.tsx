@@ -39,12 +39,12 @@ export default function Recruitment() {
           </div>
         </PageHero>
 
-        <section className="section shell">
+        <section id="staffing-models" className="section shell">
           <SectionHeading eyebrow="STAFFING MODELS" title="Hire the way that fits the work—not the other way around." copy="Whether you need one specialist for a sprint or a permanent leader for the next stage, we match the engagement model to your risk, timeline, and budget." />
           <div className="mt-12"><CardGrid items={recruitmentModels} /></div>
         </section>
 
-        <section className="section approach-section">
+        <section id="roles" className="section approach-section">
           <div className="shell">
             <SectionHeading eyebrow="ROLES WE PLACE" title="Deep coverage across the technical org." copy="We focus on technology talent—so our network runs deep in exactly the roles hard to fill through generalist recruiters." />
             <div className="tech-grid mt-12">
@@ -58,7 +58,7 @@ export default function Recruitment() {
           </div>
         </section>
 
-        <section className="section shell">
+        <section id="hiring-process" className="section shell">
           <SectionHeading eyebrow="HOW WE HIRE" title="A hiring process built to surface signal, not volume." />
           <div className="process-grid">
             {recruitmentProcess.map(([number, title, copy]) => (
@@ -101,7 +101,7 @@ export default function Recruitment() {
           </div>
         </section>
 
-        <section className="section approach-section">
+        <section id="faq" className="section approach-section">
           <div className="shell">
             <SectionHeading eyebrow="FAQ" title="Common questions about hiring through Nexio Talent." />
             <Faq items={recruitmentFaqs} />
