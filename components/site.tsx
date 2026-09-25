@@ -7,27 +7,12 @@ import { ArrowUpRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react'
 import { solutionLinks, industryLinks } from '@/lib/site-data'
 
 export const navItems: { label: string; href: string; children?: { title: string; href: string; copy: string }[] }[] = [
-  { label: 'Services', href: '/services', children: [
-    { title: 'What We Do', href: '/services#capabilities', copy: 'Our full range of engineering and AI capabilities.' },
-    { title: 'Technology', href: '/services#technology', copy: 'The languages, frameworks, and platforms we build with.' },
-    { title: 'How We Engage', href: '/services#engagement', copy: 'Flexible engagement models with consistent ownership.' },
-    { title: 'FAQ', href: '/services#faq', copy: 'Common questions about working with us.' },
-  ] },
+  { label: 'Services', href: '/services' },
   { label: 'Solutions', href: '/solutions', children: solutionLinks },
   { label: 'Industries', href: '/industries', children: industryLinks },
-  { label: 'Recruitment', href: '/recruitment', children: [
-    { title: 'Staffing Models', href: '/recruitment#staffing-models', copy: 'Permanent, contract, and contract-to-hire options.' },
-    { title: 'Roles We Place', href: '/recruitment#roles', copy: 'Deep coverage across the technical org.' },
-    { title: 'How We Hire', href: '/recruitment#hiring-process', copy: 'A process built to surface signal, not volume.' },
-    { title: 'FAQ', href: '/recruitment#faq', copy: 'Common questions about hiring through us.' },
-  ] },
+  { label: 'Recruitment', href: '/recruitment' },
   { label: 'Work', href: '/work' },
-  { label: 'About', href: '/about', children: [
-    { title: 'Who We Are', href: '/about#who-we-are', copy: 'A senior engineering team for meaningful technical work.' },
-    { title: 'The Method', href: '/about#method', copy: 'Five stages of software delivery, one accountable team.' },
-    { title: 'How We Communicate', href: '/about#communication', copy: 'No surprises, no black boxes.' },
-    { title: 'What We Believe', href: '/about#values', copy: 'The values behind every project we deliver.' },
-  ] },
+  { label: 'About', href: '/about' },
 ]
 
 export function Logo() { return <Link href="/" className="flex items-center gap-3" aria-label="Nexio home"><svg className="logo-mark" width="34" height="34" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><linearGradient id="nx-logo-g" x1="0" y1="32" x2="32" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#2C5FD6" /><stop offset="1" stopColor="#6A9BFF" /></linearGradient></defs><rect x="1" y="1" width="30" height="30" rx="8.5" fill="#0d1219" stroke="url(#nx-logo-g)" strokeOpacity="0.4" /><path d="M9 23 L9 9 L23 23 L23 9" fill="none" stroke="url(#nx-logo-g)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /><circle cx="9" cy="9" r="2" fill="url(#nx-logo-g)" /><circle cx="23" cy="23" r="2" fill="url(#nx-logo-g)" /><circle cx="23" cy="9" r="2" fill="url(#nx-logo-g)" /></svg><span className="font-heading text-[19px] font-bold tracking-[-0.03em] text-foreground">Nexio</span></Link> }
@@ -73,7 +58,7 @@ function FooterAccordion({ title, links }: { title: string; links: [string, stri
 
 export function Footer() { return <footer className="footer"><div className="shell"><div className="grid gap-10 border-b border-border pb-10 md:grid-cols-[1.5fr_repeat(3,1fr)]"><div className="footer-brand"><Logo /><p className="mt-4 max-w-xs text-sm text-muted-foreground">Move fast. Ship better. Senior engineering for ambitious teams.</p></div><FooterAccordion title="Company" links={[['About', '/about'], ['How We Work', '/about#method'], ['Recruitment', '/recruitment'], ['Work', '/work'], ['Contact', '/contact']]} /><FooterAccordion title="Solutions" links={[['AI & Automation', '/solutions/ai-automation'], ['Software Engineering', '/solutions/software-engineering'], ['Mobile', '/solutions/mobile'], ['Cloud & DevOps', '/solutions/cloud-devops']]} /><div className="footer-col footer-connect"><p className="footer-label">Connect</p><a href="#" aria-label="LinkedIn placeholder" className="footer-link" onClick={e => e.preventDefault()}><span>LinkedIn</span><ArrowUpRight aria-hidden="true" /></a><a href="mailto:hello@vectorship.ai" className="footer-link"><span>Email</span><ArrowUpRight aria-hidden="true" /></a></div></div><div className="flex flex-col items-center gap-3 pt-6 text-center text-xs text-muted-foreground md:flex-row md:items-center md:justify-between md:text-left"><span>© 2026 Nexio AI Solutions. All rights reserved.</span><span className="flex gap-5"><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms of Service</Link></span></div></div></footer> }
 
-export function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) { return <div className="max-w-3xl"><p className="eyebrow">{eyebrow}</p><h2 className="mt-4 text-balance text-[clamp(1.7rem,2.6vw,2.5rem)] font-semibold leading-[1.15] tracking-[-0.045em] text-foreground">{title}</h2>{copy && <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted-foreground">{copy}</p>}</div> }
+export function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) { return <div className="max-w-3xl"><p className="eyebrow">{eyebrow}</p><h2 className="mt-4 text-balance text-[clamp(1.7rem,2.6vw,2.5rem)] font-semibold leading-[1.22] tracking-[-0.045em] text-foreground">{title}</h2>{copy && <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted-foreground">{copy}</p>}</div> }
 
 export function PageHero({ eyebrow='VECTORSHIP AI SOLUTIONS', title, copy, children }: { eyebrow?: string; title: string; copy: string; children?: React.ReactNode }) { return <section className="page-hero shell"><p className="eyebrow"><span className="pulse-dot" />{eyebrow}</p><h1 className="text-balance">{title}</h1><p className="page-lede">{copy}</p>{children}</section> }
 
