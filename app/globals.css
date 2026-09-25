@@ -88,6 +88,10 @@ a:hover > .logo-mark { filter: drop-shadow(0 0 15px rgba(101,226,224,.4)); trans
 /* Hover interactivity — cards, chips, marquee, and grid rows */
 .profile-card, .case-card, .booking-card { transition: border-color .25s ease; }
 .profile-card:hover, .case-card:hover, .booking-card:hover { border-color: rgba(56,168,255,.4); box-shadow: var(--glow); }
+.industry-card { justify-content: flex-start; min-height: 200px; padding: 28px; }
+.industry-card h3 { margin-top: 12px; font-size: 1.35rem; letter-spacing: -.03em; }
+.industry-card p { color: var(--muted-foreground); font-size: .9rem; line-height: 1.7; }
+.industry-card .card-link { margin-top: auto; padding-top: 20px; }
 .icon-box { transition: color .25s ease, border-color .25s ease, background-color .25s ease, box-shadow .25s ease; }
 .capability-card:hover .icon-box { border-color: rgba(101,226,224,.55); background: rgba(101,226,224,.09); box-shadow: 0 0 20px rgba(101,226,224,.14); }
 .tag-list span, .tech-group span, .large-tags span { transition: color .2s ease, border-color .2s ease, background-color .2s ease; }

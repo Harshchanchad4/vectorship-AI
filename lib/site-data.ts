@@ -67,6 +67,172 @@ export const industries: [string, string][] = [
   ['Professional Services', 'Client portals, workflow automation, and AI copilots for expert teams.'],
 ]
 
+/* ── Industries & Domains ──────────────────────────────────────────────── */
+
+export const industryLinks = [
+  { title: 'Fintech & Financial Services', href: '/industries/fintech', copy: 'Secure, compliant payment platforms, trading tools, dashboards, and financial integrations.' },
+  { title: 'Healthcare & Health Tech', href: '/industries/healthcare', copy: 'HIPAA-aware systems, patient platforms, and clinical workflows built on privacy by design.' },
+  { title: 'SaaS & Startups', href: '/industries/saas-startups', copy: 'Multi-tenant product platforms and MVPs built to launch fast and scale cleanly.' },
+  { title: 'E-commerce & Retail', href: '/industries/ecommerce', copy: 'Storefronts, checkout, and backend systems engineered for conversion and scale.' },
+  { title: 'Logistics & Supply Chain', href: '/industries/logistics', copy: 'Tracking, routing, and automation that removes operational friction end to end.' },
+  { title: 'Professional Services', href: '/industries/professional-services', copy: 'Client portals, workflow automation, and AI copilots for expert-led teams.' },
+]
+
+export type Industry = {
+  title: string
+  copy: string
+  eyebrow: string
+  seoTitle: string
+  seoDescription: string
+  items: string[]
+  sections: [string, string][]
+  outcomesTitle: string
+  outcomesCopy: string
+  outcomes: string[]
+  faqs: [string, string][]
+}
+
+export const industryData: Record<string, Industry> = {
+  fintech: {
+    title: 'Fintech software built for trust, compliance, and scale.',
+    copy: 'We build secure financial products—payment platforms, lending tools, trading dashboards, and banking integrations—where correctness, auditability, and regulatory compliance are engineered in from the first commit, not bolted on before launch.',
+    eyebrow: 'FINTECH & FINANCIAL SERVICES',
+    seoTitle: 'Fintech Software Development Company | Payments, Banking & Compliance',
+    seoDescription: 'Custom fintech software development: secure payment platforms, lending and trading systems, banking API integrations, and compliant financial dashboards built by a senior engineering team.',
+    items: ['Payment platforms', 'Lending & underwriting', 'Trading & investing tools', 'Banking API integrations', 'KYC / AML workflows', 'Fraud detection', 'Financial dashboards', 'Ledger & reconciliation', 'PCI-DSS compliance', 'Open banking', 'Wallets & payouts', 'Regulatory reporting'],
+    sections: [
+      ['What we build', 'Payment and payout platforms, lending and underwriting engines, trading and portfolio tools, and the banking, card, and ledger integrations behind them—engineered for accuracy and auditability.'],
+      ['Security & compliance first', 'PCI-DSS-aware architecture, encryption in transit and at rest, least-privilege access, and full audit trails, so security reviews and regulatory obligations are met by design rather than patched later.'],
+      ['Integrations that matter', 'Stripe, Plaid, and core banking, card, KYC/AML, and open-banking providers connected cleanly, with reconciliation and idempotency handled so money movement stays correct under real-world failure.'],
+      ['AI where it earns trust', 'Fraud detection, document intelligence, and financial copilots built with guardrails, explainability, and human-in-the-loop review—so automation supports decisions without becoming a black box.'],
+    ],
+    outcomesTitle: 'What you get from a fintech engagement.',
+    outcomesCopy: 'A financial system you can defend in a security review and an audit—not just demo to investors.',
+    outcomes: ['An architecture designed around correctness, idempotency, and auditability of every transaction', 'Security controls and access boundaries mapped to PCI-DSS and your regulatory scope', 'Clean integrations with payment, banking, and KYC/AML providers, with reconciliation built in', 'Fraud and risk tooling with explainable, human-reviewable decisions', 'Complete audit logging so compliance and disputes are traceable end to end', 'Documentation your compliance, security, and finance teams can actually rely on'],
+    faqs: [
+      ['Do you have experience with financial compliance and regulations?', 'Yes. We build to PCI-DSS-aware standards and design around KYC/AML, SOC 2, and audit requirements. We are engineers, not your compliance authority, so we work alongside your legal and compliance teams—but security, access control, and audit logging are engineered in from the start.'],
+      ['Which payment and banking providers do you integrate with?', 'Commonly Stripe, Plaid, and major card, ACH, core-banking, and open-banking APIs. We handle reconciliation, idempotency, and failure recovery so money movement stays correct even when a provider or network call fails.'],
+      ['How do you keep financial data and transactions secure?', 'Encryption in transit and at rest, least-privilege access, secrets management, tokenization of sensitive data, and complete audit trails—reviewed against your regulatory scope rather than a generic checklist.'],
+      ['Can you build fraud detection or AI features for a financial product?', 'Yes. We build fraud and risk models, document intelligence, and financial copilots with guardrails, explainability, and human-in-the-loop review, so automated decisions remain defensible and auditable.'],
+    ],
+  },
+  healthcare: {
+    title: 'Healthcare software that respects patients, privacy, and clinical reality.',
+    copy: 'We build health-tech platforms—patient portals, telehealth, clinical tools, and data systems—where privacy, reliability, and the way clinicians actually work come first. HIPAA-aware architecture and interoperability are part of the design, not a late-stage scramble.',
+    eyebrow: 'HEALTHCARE & HEALTH TECH',
+    seoTitle: 'Healthcare Software Development Company | HIPAA, Telehealth & Health Tech',
+    seoDescription: 'HIPAA-aware healthcare software development: patient portals, telehealth platforms, clinical workflow tools, EHR/FHIR integrations, and secure health data systems built by senior engineers.',
+    items: ['Patient portals', 'Telehealth platforms', 'Clinical workflow tools', 'EHR / EMR integration', 'HL7 & FHIR', 'HIPAA-aware architecture', 'Scheduling & intake', 'Remote monitoring', 'Health data pipelines', 'Care coordination', 'Medical device backends', 'Analytics & reporting'],
+    sections: [
+      ['What we build', 'Patient portals, telehealth and remote-monitoring platforms, clinical and care-coordination tools, and the secure data pipelines and integrations that connect them to the systems providers already use.'],
+      ['Privacy by design', 'HIPAA-aware architecture with encryption, strict access control, audit logging, and data-minimization—so protected health information is safeguarded structurally, not by policy alone.'],
+      ['Interoperability', 'HL7, FHIR, and EHR/EMR integrations that let your product exchange data with existing clinical systems instead of becoming another isolated island of information.'],
+      ['Built for clinical workflows', 'We design around how clinicians and patients actually behave—reducing clicks, respecting real care pathways, and keeping the system reliable when it matters most.'],
+    ],
+    outcomesTitle: 'What you get from a healthcare engagement.',
+    outcomesCopy: 'A health product that clears a privacy review and fits the way care is actually delivered.',
+    outcomes: ['HIPAA-aware architecture with encryption, access control, and full audit logging', 'EHR/EMR interoperability via HL7 and FHIR, not a walled-off data silo', 'Workflows designed around real clinical and patient behavior, validated early', 'A reliability and data-integrity plan for systems people depend on', 'Clear separation and handling of PHI across every environment', 'Documentation your compliance and clinical stakeholders can review with confidence'],
+    faqs: [
+      ['Do you build HIPAA-compliant software?', 'We build HIPAA-aware systems—encryption, access control, audit logging, and data minimization engineered in from the start. Compliance is organizational as well as technical, so we work with your compliance team and can operate under a BAA, while owning the architecture and safeguards on the engineering side.'],
+      ['Can you integrate with our EHR or EMR system?', 'Yes. We work with HL7 and FHIR and integrate with major EHR/EMR platforms so your product can exchange clinical data securely rather than living in isolation.'],
+      ['How do you protect patient health information (PHI)?', 'PHI is encrypted in transit and at rest, access is least-privilege and logged, environments are separated, and we minimize where sensitive data flows—so protection is structural rather than dependent on policy alone.'],
+      ['Can you build telehealth or remote patient monitoring features?', 'Yes. We build telehealth, scheduling, intake, and remote-monitoring platforms, including the secure video, messaging, and device-data pipelines behind them.'],
+    ],
+  },
+  'saas-startups': {
+    title: 'SaaS platforms and MVPs built to launch fast and scale cleanly.',
+    copy: 'We help founders and product teams turn an idea into a real, revenue-ready SaaS product—multi-tenant architecture, billing, auth, and the core features that matter—shipped quickly without the technical debt that stalls the next round of growth.',
+    eyebrow: 'SAAS & STARTUPS',
+    seoTitle: 'SaaS Development Company for Startups | MVP & Multi-Tenant Platforms',
+    seoDescription: 'SaaS and startup software development: multi-tenant platforms, MVPs, subscription billing, authentication, and product engineering built to launch fast and scale by a senior team.',
+    items: ['MVP development', 'Multi-tenant SaaS', 'Subscription billing', 'Authentication & SSO', 'Admin & analytics dashboards', 'Usage metering', 'Role-based access', 'API & integrations', 'Onboarding flows', 'Feature flags', 'Scalable architecture', 'Product analytics'],
+    sections: [
+      ['What we build', 'End-to-end SaaS products: multi-tenant platforms, subscription billing, authentication and SSO, admin and analytics dashboards, and the APIs and integrations customers expect.'],
+      ['Ship the MVP that proves it', 'We scope to the smallest product that validates the business, ship it fast, and keep the architecture clean enough to build on—so early speed does not become next year’s rewrite.'],
+      ['Built to scale with revenue', 'Multi-tenancy, metering, and infrastructure sized to real usage, with a documented path to scale so growth is an upgrade, not an emergency.'],
+      ['Founder-friendly delivery', 'Direct access to senior engineers, visible milestones, and honest tradeoff conversations—so a lean team can move fast without flying blind.'],
+    ],
+    outcomesTitle: 'What you get from a SaaS engagement.',
+    outcomesCopy: 'A product you can sell and keep building on—not a demo that collapses under the first ten paying customers.',
+    outcomes: ['A launched MVP scoped around what actually validates the business', 'Multi-tenant architecture with clean data isolation between customers', 'Subscription billing, authentication, and access control wired to real providers', 'An admin and analytics layer so you can see what users actually do', 'A codebase clean enough to raise on and hire into, not rewrite', 'A clear path to scale infrastructure as paying customers grow'],
+    faqs: [
+      ['Can you build an MVP quickly without creating technical debt?', 'Yes. We scope to the smallest product that validates the business and ship it fast, while keeping the architecture clean enough to extend—so speed early doesn’t force a rewrite later.'],
+      ['Do you handle subscription billing and payments?', 'Yes. We integrate Stripe and similar providers for subscriptions, usage-based billing, and metering, including the plan, trial, and upgrade logic behind them.'],
+      ['How do you build multi-tenant SaaS architecture?', 'We design tenant isolation, role-based access, and data separation from the start, choosing the right multi-tenancy model for your security needs and scale rather than defaulting to one pattern.'],
+      ['Can you work with our existing product or take it over from another team?', 'Yes. We regularly inherit existing SaaS codebases—auditing the architecture first, then extending it or planning a staged improvement rather than a risky full rebuild.'],
+    ],
+  },
+  ecommerce: {
+    title: 'E-commerce and retail systems engineered for conversion and scale.',
+    copy: 'We build storefronts, checkout flows, and the backend systems behind them—inventory, orders, payments, and integrations—engineered for fast pages, high conversion, and the traffic spikes that come with a successful campaign.',
+    eyebrow: 'E-COMMERCE & RETAIL',
+    seoTitle: 'E-commerce Development Company | Storefronts, Checkout & Retail Systems',
+    seoDescription: 'E-commerce and retail software development: high-converting storefronts, custom checkout, headless commerce, inventory and order systems, and payment integrations built by senior engineers.',
+    items: ['Custom storefronts', 'Headless commerce', 'Checkout optimization', 'Payment integrations', 'Inventory management', 'Order management', 'Shopify & platform builds', 'Product search', 'Subscriptions & recurring', 'ERP / POS integration', 'Performance & Core Web Vitals', 'Personalization'],
+    sections: [
+      ['What we build', 'High-converting storefronts, custom and headless checkout, and the inventory, order, payment, and fulfillment systems behind them—connected to the platforms and marketplaces you already sell on.'],
+      ['Engineered for conversion', 'Fast pages, strong Core Web Vitals, and friction-free checkout, because in commerce, performance and conversion are the same conversation.'],
+      ['Ready for the spike', 'Architecture that stays fast and correct through a launch, a sale, or a seasonal peak—so a successful campaign doesn’t take the store down.'],
+      ['Connected operations', 'Clean integrations with payments, ERP, POS, and fulfillment so inventory, orders, and finance stay in sync instead of drifting apart.'],
+    ],
+    outcomesTitle: 'What you get from an e-commerce engagement.',
+    outcomesCopy: 'A store that loads fast, converts, and stays correct when traffic and orders spike.',
+    outcomes: ['A storefront tuned for Core Web Vitals and real-world conversion', 'A checkout flow engineered to reduce friction and abandonment', 'Inventory, order, and payment systems that stay consistent under load', 'Integrations with your ERP, POS, and fulfillment so operations stay in sync', 'Architecture that survives launch-day and seasonal traffic spikes', 'A maintainable codebase you or another team can keep extending'],
+    faqs: [
+      ['Do you build on Shopify, or custom, or headless?', 'All three. We build on Shopify and similar platforms, custom storefronts, and headless commerce—recommending the approach that fits your catalog, customization needs, and scale rather than defaulting to one.'],
+      ['Can you improve our store’s speed and conversion?', 'Yes. We optimize Core Web Vitals, page performance, and checkout friction—the factors most directly tied to conversion—starting from a measured audit rather than guesswork.'],
+      ['Will the store stay up during a big sale or launch?', 'That’s a core design goal. We architect for peak traffic with caching, scalable infrastructure, and load testing so campaigns don’t take the store down.'],
+      ['Can you integrate our store with our ERP, POS, or fulfillment systems?', 'Yes. We build integrations that keep inventory, orders, payments, and finance in sync across your commerce platform, ERP, POS, and fulfillment providers.'],
+    ],
+  },
+  logistics: {
+    title: 'Logistics and supply-chain software that removes operational friction.',
+    copy: 'We build the tracking, routing, and automation systems that keep operations moving—real-time visibility, dispatch and fleet tools, warehouse and inventory systems, and the integrations that connect a fragmented supply chain into one clear picture.',
+    eyebrow: 'LOGISTICS & SUPPLY CHAIN',
+    seoTitle: 'Logistics Software Development Company | Supply Chain, Fleet & Tracking',
+    seoDescription: 'Logistics and supply-chain software development: real-time tracking, route optimization, fleet and dispatch tools, warehouse and inventory systems, and operations automation built by senior engineers.',
+    items: ['Real-time tracking', 'Route optimization', 'Fleet management', 'Dispatch systems', 'Warehouse management', 'Inventory systems', 'Order & shipment management', 'Carrier integrations', 'Telematics & IoT', 'Operations dashboards', 'Workflow automation', 'Predictive ETA'],
+    sections: [
+      ['What we build', 'Real-time tracking and visibility platforms, route and dispatch optimization, fleet and warehouse management, and the carrier, telematics, and ERP integrations that tie operations together.'],
+      ['Visibility across the chain', 'One accurate, real-time picture of shipments, inventory, and assets—so decisions are made on live data instead of stale spreadsheets and phone calls.'],
+      ['Automation that removes friction', 'We automate the repetitive coordination—dispatch, status updates, exceptions, and reordering—so your team spends time on problems, not data entry.'],
+      ['Built for the field', 'Reliable mobile and offline-tolerant tools for drivers and warehouse staff, plus dashboards that give operations and management the control they need.'],
+    ],
+    outcomesTitle: 'What you get from a logistics engagement.',
+    outcomesCopy: 'One live, accurate view of your operation—and automation that gives your team hours back.',
+    outcomes: ['Real-time visibility into shipments, inventory, and assets in one place', 'Route, dispatch, or warehouse optimization tuned to your actual constraints', 'Automation of the repetitive coordination work that eats operational time', 'Integrations across carriers, telematics, ERP, and existing systems', 'Reliable field-facing tools for drivers and warehouse staff', 'Operations dashboards that turn raw activity into decisions'],
+    faqs: [
+      ['Can you build real-time tracking and visibility?', 'Yes. We build real-time tracking for shipments, vehicles, and inventory using telematics, GPS, and IoT data, surfaced through dashboards and predictive ETAs your team can act on.'],
+      ['Do you integrate with carriers, ERP, or existing logistics systems?', 'Yes. We connect carrier APIs, telematics providers, ERP, WMS, and legacy systems so data flows into one picture instead of living in disconnected tools.'],
+      ['Can you optimize routing or dispatch?', 'Yes. We build route and dispatch optimization tuned to your real constraints—capacity, time windows, cost, and service levels—rather than a generic solver.'],
+      ['Will field tools work with poor or no connectivity?', 'We design driver and warehouse tools to tolerate spotty connectivity, syncing reliably when a connection returns so field work isn’t blocked by dead zones.'],
+    ],
+  },
+  'professional-services': {
+    title: 'Software and AI copilots for expert-led professional teams.',
+    copy: 'We build the client portals, workflow automation, and AI copilots that let professional-services firms—legal, accounting, consulting, agencies—scale their expertise without scaling headcount, turning manual, document-heavy work into leverage.',
+    eyebrow: 'PROFESSIONAL SERVICES',
+    seoTitle: 'Software for Professional Services | Client Portals, Automation & AI Copilots',
+    seoDescription: 'Custom software for professional-services firms: client portals, workflow and document automation, practice-management tools, and AI copilots for legal, accounting, consulting, and agencies.',
+    items: ['Client portals', 'Workflow automation', 'Document automation', 'AI copilots & assistants', 'Practice management', 'Time & billing', 'Knowledge retrieval (RAG)', 'Proposal & contract tools', 'Reporting dashboards', 'CRM integration', 'e-Signature & intake', 'Compliance workflows'],
+    sections: [
+      ['What we build', 'Client portals, practice-management and billing tools, document and workflow automation, and AI copilots that put a firm’s own knowledge and process to work.'],
+      ['Turn expertise into leverage', 'We automate the repetitive, document-heavy work—intake, drafting, review, reporting—so senior people spend time on judgment, not busywork.'],
+      ['AI grounded in your knowledge', 'RAG-based copilots and assistants built on your own documents, precedents, and processes, with guardrails and human review—so answers reflect your firm, not a generic model.'],
+      ['Client-facing polish', 'Portals and workflows that make the client experience feel organized and premium, reflecting the quality of the advice behind them.'],
+    ],
+    outcomesTitle: 'What you get from a professional-services engagement.',
+    outcomesCopy: 'Systems that let your best people do more of what only they can do.',
+    outcomes: ['A client portal that makes the engagement feel organized and premium', 'Automation of the document-heavy, repetitive work that consumes billable hours', 'AI copilots grounded in your own knowledge, with human-in-the-loop review', 'Practice, billing, and reporting tools tailored to how your firm operates', 'Integrations with the CRM, e-signature, and tools you already use', 'A system your team adopts because it removes friction, not adds it'],
+    faqs: [
+      ['Can you build AI copilots trained on our firm’s documents and knowledge?', 'Yes. We build RAG-based copilots grounded in your own documents, precedents, and processes—with guardrails and human review—so responses reflect your firm’s knowledge rather than generic model output.'],
+      ['What kinds of work can you automate for a professional-services firm?', 'Typically the repetitive, document-heavy work: intake, drafting, review, data extraction, reporting, and status updates—freeing senior people for judgment-driven work.'],
+      ['Can you build a client portal that integrates with our existing tools?', 'Yes. We build client portals and workflows that integrate with your CRM, billing, e-signature, and document systems so clients and staff work in one coherent place.'],
+      ['How do you keep confidential client data secure?', 'Access is least-privilege and logged, sensitive data is encrypted and minimized, and AI features are scoped so confidential material isn’t exposed—reviewed against your confidentiality obligations.'],
+    ],
+  },
+}
+
 export const siteOverview = [
   { label: 'SOLUTIONS', title: 'Technology matched to the problem, not the trend.', copy: 'How we pick the right architecture—AI, software, mobile, or cloud—based on the outcome you actually need.', href: '/solutions', cta: 'See solutions' },
   { label: 'SERVICES', title: 'The full engineering menu, end to end.', copy: 'Every service we offer, from AI agents to backend systems to DevOps, laid out in one place.', href: '/services', cta: 'See services' },

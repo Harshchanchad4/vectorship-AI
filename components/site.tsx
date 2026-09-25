@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react'
-import { solutionLinks } from '@/lib/site-data'
+import { solutionLinks, industryLinks } from '@/lib/site-data'
 
 export const navItems: { label: string; href: string; children?: { title: string; href: string; copy: string }[] }[] = [
   { label: 'Services', href: '/services', children: [
@@ -14,6 +14,7 @@ export const navItems: { label: string; href: string; children?: { title: string
     { title: 'FAQ', href: '/services#faq', copy: 'Common questions about working with us.' },
   ] },
   { label: 'Solutions', href: '/solutions', children: solutionLinks },
+  { label: 'Industries', href: '/industries', children: industryLinks },
   { label: 'Recruitment', href: '/recruitment', children: [
     { title: 'Staffing Models', href: '/recruitment#staffing-models', copy: 'Permanent, contract, and contract-to-hire options.' },
     { title: 'Roles We Place', href: '/recruitment#roles', copy: 'Deep coverage across the technical org.' },
