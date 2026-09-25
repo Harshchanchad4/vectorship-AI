@@ -236,7 +236,7 @@ export const industryData: Record<string, Industry> = {
 export const siteOverview = [
   { label: 'SOLUTIONS', title: 'Technology matched to the problem, not the trend.', copy: 'How we pick the right architecture—AI, software, mobile, or cloud—based on the outcome you actually need.', href: '/solutions', cta: 'See solutions' },
   { label: 'SERVICES', title: 'The full engineering menu, end to end.', copy: 'Every service we offer, from AI agents to backend systems to DevOps, laid out in one place.', href: '/services', cta: 'See services' },
-  { label: 'APPROACH', title: 'A delivery process built to stay honest.', copy: 'The five stages we run every engagement through, and how we keep communication clear along the way.', href: '/approach', cta: 'See our approach' },
+  { label: 'APPROACH', title: 'A delivery process built to stay honest.', copy: 'The five stages we run every engagement through, and how we keep communication clear along the way.', href: '/about#method', cta: 'See our approach' },
   { label: 'WORK', title: 'The kinds of problems we take on.', copy: 'A look at the engagements we support while our public case study library comes together.', href: '/work', cta: 'See our work' },
   { label: 'RECRUITMENT', title: 'Need to grow your own team instead?', copy: 'How we help you hire vetted software, AI, and cloud talent—permanent, contract, or contract-to-hire.', href: '/recruitment', cta: 'See recruitment' },
   { label: 'ABOUT', title: 'Who is actually behind the work.', copy: 'The team, the standards, and the reasoning behind how Nexio operates as a partner.', href: '/about', cta: 'See about us' },
