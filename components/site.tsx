@@ -3,8 +3,22 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { ArrowUpRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, ChevronRight, Menu, X, Sparkles, Code2, Smartphone, Cloud, Landmark, HeartPulse, Layers, ShoppingCart, Truck, Briefcase, type LucideIcon } from 'lucide-react'
 import { solutionLinks, industryLinks } from '@/lib/site-data'
+
+// Icon per dropdown destination — keyed by href so Solutions and Industries both resolve.
+const navIcons: Record<string, LucideIcon> = {
+  '/solutions/ai-automation': Sparkles,
+  '/solutions/software-engineering': Code2,
+  '/solutions/mobile': Smartphone,
+  '/solutions/cloud-devops': Cloud,
+  '/industries/fintech': Landmark,
+  '/industries/healthcare': HeartPulse,
+  '/industries/saas-startups': Layers,
+  '/industries/ecommerce': ShoppingCart,
+  '/industries/logistics': Truck,
+  '/industries/professional-services': Briefcase,
+}
 
 export const navItems: { label: string; href: string; children?: { title: string; href: string; copy: string }[] }[] = [
   { label: 'Services', href: '/services' },
@@ -34,7 +48,13 @@ export function Navbar() {
     <div className="shell flex h-18 items-center justify-between"><Logo /><nav className="hidden items-center gap-8 md:flex" aria-label="Primary">{navItems.map(({ label, href, children }) => children ? (
       <div className="nav-item-has-children" key={href}>
         <Link href={href} aria-current={isActive(href) ? 'page' : undefined} className={isActive(href) ? 'nav-link-active' : ''}>{label} <ChevronDown className="nav-caret" aria-hidden="true" /></Link>
-        <div className="nav-dropdown"><div className="nav-dropdown-panel">{children.map(c => <Link key={c.href} href={c.href} className="nav-dropdown-item"><span>{c.title}</span><small>{c.copy}</small></Link>)}</div></div>
+        <div className="nav-dropdown"><div className="nav-dropdown-panel">
+          <div className="nav-dropdown-grid">{children.map(c => { const Icon = navIcons[c.href] ?? ChevronRight; return (
+            <Link key={c.href} href={c.href} className="nav-dropdown-item"><span className="nav-dropdown-icon"><Icon className="size-[18px]" aria-hidden="true" /></span><span className="nav-dropdown-text"><span>{c.title}</span><small>{c.copy}</small></span></Link>
+          )})}</div>
+          <Link href="/contact" className="nav-dropdown-cta"><span className="nav-dropdown-cta-eyebrow">DON&apos;T SEE YOURS?</span><strong>Tell us what you&apos;re building.</strong><p>Share the problem and we&apos;ll map the right approach.</p><span className="card-link mt-0!">Get in touch <ArrowUpRight className="size-4" /></span></Link>
+          <div className="nav-dropdown-foot"><span>{children.length} OPTIONS</span><Link href={href} className="card-link mt-0!">View all {label.toLowerCase()} <ArrowUpRight className="size-4" /></Link></div>
+        </div></div>
       </div>
     ) : <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} className={isActive(href) ? 'nav-link-active' : ''}>{label}</Link>)}</nav><div className="hidden md:block"><Link href="/contact" className="button-primary inline-flex min-h-10 items-center rounded-sm px-4 py-2 text-sm">Let&apos;s Talk <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link></div><button className="inline-flex size-10 shrink-0 items-center justify-center rounded-sm border border-border md:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div>
     {open && <nav className="mobile-menu shell flex flex-col border-t border-border py-6 md:hidden" aria-label="Mobile primary">{navItems.map(({ label, href, children }, i) => <div className="mobile-nav-row" key={href}><Link href={href} aria-current={isActive(href) ? 'page' : undefined} className={`mobile-nav-link ${isActive(href) ? 'nav-link-active' : ''}`} style={{ animationDelay: `${i * 40}ms` }} onClick={() => setOpen(false)}><span className="mobile-nav-num">{String(i + 1).padStart(2, '0')}</span><span>{label}</span><ChevronRight className="mobile-nav-arrow" aria-hidden="true" /></Link>{children && <div className="mobile-nav-children">{children.map(c => <Link key={c.href} href={c.href} className="mobile-nav-child" onClick={() => setOpen(false)}>{c.title}</Link>)}</div>}</div>)}<Link href="/contact" onClick={() => setOpen(false)} className="button-primary mobile-nav-cta inline-flex min-h-12 items-center justify-center rounded-sm px-4 py-2 text-sm" style={{ animationDelay: `${navItems.length * 40}ms` }}>Let&apos;s Talk <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link></nav>}
