@@ -195,7 +195,8 @@ type ExpertiseItem = [string, string]
 
 export function ExpertiseCards({ items }: { items: ExpertiseItem[] }) {
   const reduce = useReducedMotion()
-  const [flipped, setFlipped] = useState<number | null>(null)
+  const [flipped, setFlipped] = useState<number[]>([])
+  const toggle = (i: number) => setFlipped(f => (f.includes(i) ? f.filter(x => x !== i) : [...f, i]))
   return (
     <motion.div
       className="xp-grid mt-12"
@@ -205,7 +206,7 @@ export function ExpertiseCards({ items }: { items: ExpertiseItem[] }) {
       viewport={{ once: true, amount: 0.15 }}
     >
       {items.map(([title, copy], i) => {
-        const isFlipped = flipped === i
+        const isFlipped = flipped.includes(i)
         return (
           <motion.button
             type="button"
@@ -213,7 +214,7 @@ export function ExpertiseCards({ items }: { items: ExpertiseItem[] }) {
             variants={reduce ? undefined : item}
             aria-pressed={isFlipped}
             className={`xp-card${isFlipped ? ' is-flipped' : ''}`}
-            onClick={() => setFlipped(isFlipped ? null : i)}
+            onClick={() => toggle(i)}
           >
             <span className="xp-card-inner">
               <span className="xp-face xp-front">
