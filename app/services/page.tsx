@@ -1,6 +1,6 @@
 import { pageMetadata } from '@/lib/metadata'
 import { CTA, PageHero, SectionHeading, SiteShell } from '@/components/site'
-import { CapabilityCarousel } from '@/components/motion-sections'
+import { CapabilityShowcase } from '@/components/motion-sections'
 import { Faq } from '@/components/faq'
 import { serviceLinks, techGroups, serviceFaqs } from '@/lib/site-data'
 import Link from 'next/link'
@@ -27,8 +27,8 @@ export default function Services() {
         <PageHero title="Software engineering & AI development services built for real business problems." copy="Nexio provides end-to-end AI development, software engineering, mobile, and cloud DevOps services for teams that need clarity, speed, and ownership from idea through production." />
 
         <section id="capabilities" className="section shell">
-          <SectionHeading eyebrow="WHAT WE DO" title="A senior software engineering partner for the work that matters." copy="Drag, or use the arrows, to move through everything we build." />
-          <CapabilityCarousel items={serviceLinks} />
+          <SectionHeading eyebrow="WHAT WE DO" title="A senior software engineering partner for the work that matters." copy="Pick a capability to see how we approach it—or let it cycle through everything we build." />
+          <CapabilityShowcase items={serviceLinks} />
         </section>
 
         <section id="technology" className="section approach-section">

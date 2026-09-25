@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, ArrowLeft, ArrowRight, ChevronRight, Check } from 'lucide-react'
-import { animate, motion, useMotionValue, useMotionValueEvent, useReducedMotion, type Variants } from 'motion/react'
+import { useEffect, useState } from 'react'
+import { ArrowUpRight, ChevronRight, Check } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion, type Variants } from 'motion/react'
 
 // Shared entrance variants — a soft fade + slide-up with an eased curve.
 // Children stagger so each element arrives just after the previous one.
@@ -65,104 +65,84 @@ export function MotionCTA({ title = 'Have a problem worth solving?', copy = 'Let
   )
 }
 
-// A draggable, snap-free capability carousel. The track is a single motion.div
-// dragged along x; arrow buttons page by ~80% of the viewport, and a slim
-// progress bar tracks scroll position. Slides use their own always-visible
-// class so they escape the IntersectionObserver reveal (off-screen slides in
-// an overflow-clipped track would otherwise never intersect and stay hidden).
-type CardItem = { title: string; copy: string; href?: string; label?: string; cta?: string }
+// A featured capability showcase. One large panel presents the active
+// capability (big index, title, detail, CTA) and crossfades via AnimatePresence
+// when the selection changes; a list on the right navigates between them with an
+// accent indicator that slides (layoutId). It auto-advances and pauses on hover.
+const AUTO_MS = 5200
+type CardItem = { title: string; copy: string; href?: string; label?: string; cta?: string; points?: string[] }
 
-export function CapabilityCarousel({ items }: { items: CardItem[] }) {
+export function CapabilityShowcase({ items }: { items: CardItem[] }) {
   const reduce = useReducedMotion()
-  const viewportRef = useRef<HTMLDivElement>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
-  const boundsRef = useRef(0)
-  const x = useMotionValue(0)
-  const [bounds, setBounds] = useState(0)
-  const [progress, setProgress] = useState(0)
-  const [atStart, setAtStart] = useState(true)
-  const [atEnd, setAtEnd] = useState(false)
-
-  const sync = useCallback((v: number) => {
-    const max = boundsRef.current
-    setProgress(max > 0 ? Math.min(1, Math.max(0, -v / max)) : 0)
-    setAtStart(v >= -1)
-    setAtEnd(v <= -max + 1)
-  }, [])
-
-  const measure = useCallback(() => {
-    const vp = viewportRef.current
-    const tr = trackRef.current
-    if (!vp || !tr) return
-    const max = Math.max(0, tr.scrollWidth - vp.clientWidth)
-    boundsRef.current = max
-    setBounds(max)
-    if (-x.get() > max) x.set(-max)
-    sync(x.get())
-  }, [sync, x])
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const count = items.length
+  const item = items[active]
+  const total = String(count).padStart(2, '0')
+  const href = item.href ?? '/contact'
+  const cta = item.cta ?? (item.href ? 'Explore capability' : 'Discuss this capability')
 
   useEffect(() => {
-    measure()
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
-  }, [measure])
-
-  useMotionValueEvent(x, 'change', sync)
-
-  const page = (dir: 1 | -1) => {
-    const vp = viewportRef.current
-    if (!vp) return
-    const step = vp.clientWidth * 0.8
-    const target = Math.min(0, Math.max(-boundsRef.current, x.get() - dir * step))
-    animate(x, target, reduce ? { duration: 0 } : { type: 'spring', stiffness: 260, damping: 34 })
-  }
-
-  const draggable = bounds > 0 && !reduce
+    if (paused || reduce || count < 2) return
+    const id = setInterval(() => setActive(i => (i + 1) % count), AUTO_MS)
+    return () => clearInterval(id)
+  }, [paused, reduce, count])
 
   return (
-    <div className="cap-carousel">
-      <motion.div
-        className="cap-carousel-viewport"
-        initial={reduce ? false : { opacity: 0, y: 24 }}
-        whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        style={{ cursor: draggable ? 'grab' : 'default' }}
-      >
-        <motion.div
-          ref={trackRef}
-          className="cap-carousel-track"
-          style={{ x }}
-          drag={draggable ? 'x' : false}
-          dragConstraints={{ left: -bounds, right: 0 }}
-          dragElastic={0.08}
-          whileTap={draggable ? { cursor: 'grabbing' } : undefined}
-        >
-          {items.map((item, i) => (
-            <article className="cap-slide" key={item.title}>
-              <div className="capability-head">
-                <p className="eyebrow">{item.label || 'ENGINEERING CAPABILITY'}</p>
-                <span className="capability-number">{String(i + 1).padStart(2, '0')}</span>
-              </div>
-              <h3>{item.title}</h3>
-              <p className="card-copy">{item.copy}</p>
-              {item.href && (
-                <Link href={item.href} className="card-link" draggable={false}>
-                  {item.cta || 'Explore capability'} <ChevronRight className="size-4" />
-                </Link>
-              )}
-            </article>
-          ))}
-        </motion.div>
-      </motion.div>
-
-      <div className="cap-carousel-controls">
-        <div className="cap-carousel-progress"><span style={{ transform: `scaleX(${progress || 0.001})` }} /></div>
-        <div className="cap-carousel-buttons">
-          <button type="button" className="cap-carousel-btn" onClick={() => page(-1)} disabled={atStart} aria-label="Previous capabilities"><ArrowLeft className="size-[18px]" /></button>
-          <button type="button" className="cap-carousel-btn" onClick={() => page(1)} disabled={atEnd} aria-label="Next capabilities"><ArrowRight className="size-[18px]" /></button>
-        </div>
+    <motion.div
+      className="cap-showcase"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      initial={reduce ? false : { opacity: 0, y: 24 }}
+      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="cap-showcase-feature">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            className="cap-feature-inner"
+            initial={reduce ? false : { opacity: 0, y: 22 }}
+            animate={reduce ? undefined : { opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: -16 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="cap-feature-index">{String(active + 1).padStart(2, '0')}<i>/ {total}</i></span>
+            <p className="eyebrow">{item.label || 'ENGINEERING CAPABILITY'}</p>
+            <h3>{item.title}</h3>
+            <p className="cap-feature-copy">{item.copy}</p>
+            {item.points && (
+              <ul className="cap-feature-points">
+                {item.points.map(point => (
+                  <li key={point}><Check className="size-4" /><span>{point}</span></li>
+                ))}
+              </ul>
+            )}
+            <Link href={href} className="card-link">
+              {cta} <ArrowUpRight className="size-4" />
+            </Link>
+          </motion.div>
+        </AnimatePresence>
       </div>
-    </div>
+
+      <ul className="cap-showcase-list">
+        {items.map((it, i) => {
+          const isActive = i === active
+          return (
+            <li key={it.title}>
+              <button type="button" className={`cap-showcase-tab${isActive ? ' is-active' : ''}`} onClick={() => setActive(i)}>
+                {isActive && (reduce
+                  ? <span className="cap-tab-bar" />
+                  : <motion.span layoutId="cap-active-bar" className="cap-tab-bar" transition={{ type: 'spring', stiffness: 420, damping: 38 }} />)}
+                <span className="cap-tab-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="cap-tab-title">{it.title}</span>
+                <ChevronRight className="cap-tab-arrow size-4" />
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+    </motion.div>
   )
 }
