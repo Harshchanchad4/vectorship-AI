@@ -188,49 +188,48 @@ export function TechStack({ groups }: { groups: [string, string[]][] }) {
   )
 }
 
-// Expertise grid with click-to-expand cards. Only the title shows by default;
-// clicking a card reveals its description with a height + fade animation.
+// Expertise grid of 3D flip cards. The front shows the title; clicking the card
+// flips it in 3D to reveal the description on the back. Fixed height means no
+// layout shift, and cards stagger in on scroll. Tap again (or another card) to flip back.
 type ExpertiseItem = [string, string]
 
-export function ExpertiseAccordion({ items }: { items: ExpertiseItem[] }) {
+export function ExpertiseCards({ items }: { items: ExpertiseItem[] }) {
   const reduce = useReducedMotion()
-  const [open, setOpen] = useState<number | null>(null)
+  const [flipped, setFlipped] = useState<number | null>(null)
   return (
-    <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <motion.div
+      className="xp-grid mt-12"
+      variants={reduce ? undefined : container}
+      initial={reduce ? false : 'hidden'}
+      whileInView={reduce ? undefined : 'show'}
+      viewport={{ once: true, amount: 0.15 }}
+    >
       {items.map(([title, copy], i) => {
-        const isOpen = open === i
+        const isFlipped = flipped === i
         return (
-          <button
+          <motion.button
             type="button"
             key={title}
-            aria-expanded={isOpen}
-            className={`profile-card expertise-card${isOpen ? ' is-open' : ''}`}
-            onClick={() => setOpen(isOpen ? null : i)}
+            variants={reduce ? undefined : item}
+            aria-pressed={isFlipped}
+            className={`xp-card${isFlipped ? ' is-flipped' : ''}`}
+            onClick={() => setFlipped(isFlipped ? null : i)}
           >
-            <span className="expertise-head">
-              <h3>{title}</h3>
-              <span className="expertise-toggle" aria-hidden="true"><Plus className="size-4" /></span>
+            <span className="xp-card-inner">
+              <span className="xp-face xp-front">
+                <span className="xp-index">{String(i + 1).padStart(2, '0')}</span>
+                <span className="xp-title">{title}</span>
+                <span className="xp-hint">Read more <Plus className="size-3.5" /></span>
+              </span>
+              <span className="xp-face xp-back">
+                <span className="xp-back-label">{title}</span>
+                <span className="xp-back-copy">{copy}</span>
+                <span className="xp-hint">Flip back <ChevronRight className="size-3.5 -rotate-180" /></span>
+              </span>
             </span>
-            {reduce ? (
-              isOpen && <p className="expertise-copy">{copy}</p>
-            ) : (
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    className="expertise-panel"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <p className="expertise-copy">{copy}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            )}
-          </button>
+          </motion.button>
         )
       })}
-    </div>
+    </motion.div>
   )
 }
