@@ -25,9 +25,9 @@ export default async function IndustryDetail({ params }: { params: Promise<{ slu
     name: item.seoTitle,
     description: item.seoDescription,
     serviceType: item.seoTitle,
-    provider: { '@type': 'Organization', name: 'Nexio AI Solutions', url: 'https://vectorship.ai' },
+    provider: { '@type': 'Organization', name: 'Nexio AI Solutions', url: 'https://nexio.ai' },
     areaServed: 'Worldwide',
-    url: `https://vectorship.ai/industries/${slug}`,
+    url: `https://nexio.ai/industries/${slug}`,
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: item.seoTitle,

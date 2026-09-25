@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { ArrowUpRight, ChevronRight, Check } from 'lucide-react'
+import { ArrowUpRight, ChevronRight, Check, Plus } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion, type Variants } from 'motion/react'
 
 // Shared entrance variants — a soft fade + slide-up with an eased curve.
@@ -98,6 +98,24 @@ export function CapabilityShowcase({ items }: { items: CardItem[] }) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
+      <ul className="cap-showcase-list">
+        {items.map((it, i) => {
+          const isActive = i === active
+          return (
+            <li key={it.title}>
+              <button type="button" className={`cap-showcase-tab${isActive ? ' is-active' : ''}`} onClick={() => setActive(i)}>
+                {isActive && (reduce
+                  ? <span className="cap-tab-bar" />
+                  : <motion.span layoutId="cap-active-bar" className="cap-tab-bar" transition={{ type: 'spring', stiffness: 420, damping: 38 }} />)}
+                <span className="cap-tab-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="cap-tab-title">{it.title}</span>
+                <ChevronRight className="cap-tab-arrow size-4" />
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+
       <div className="cap-showcase-feature">
         <AnimatePresence mode="wait">
           <motion.div
@@ -125,24 +143,94 @@ export function CapabilityShowcase({ items }: { items: CardItem[] }) {
           </motion.div>
         </AnimatePresence>
       </div>
-
-      <ul className="cap-showcase-list">
-        {items.map((it, i) => {
-          const isActive = i === active
-          return (
-            <li key={it.title}>
-              <button type="button" className={`cap-showcase-tab${isActive ? ' is-active' : ''}`} onClick={() => setActive(i)}>
-                {isActive && (reduce
-                  ? <span className="cap-tab-bar" />
-                  : <motion.span layoutId="cap-active-bar" className="cap-tab-bar" transition={{ type: 'spring', stiffness: 420, damping: 38 }} />)}
-                <span className="cap-tab-num">{String(i + 1).padStart(2, '0')}</span>
-                <span className="cap-tab-title">{it.title}</span>
-                <ChevronRight className="cap-tab-arrow size-4" />
-              </button>
-            </li>
-          )
-        })}
-      </ul>
     </motion.div>
+  )
+}
+
+// Technology stack grid. Groups stagger in on scroll and each tag staggers in
+// after its group heading; tags lift and glow on hover for a tactile feel.
+const stackContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+}
+
+const stackGroup: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.03, delayChildren: 0.08 } },
+}
+
+const stackTag: Variants = {
+  hidden: { opacity: 0, y: 8, scale: 0.96 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
+}
+
+export function TechStack({ groups }: { groups: [string, string[]][] }) {
+  const reduce = useReducedMotion()
+  return (
+    <motion.div
+      className="tech-grid mt-12"
+      variants={reduce ? undefined : stackContainer}
+      initial={reduce ? false : 'hidden'}
+      whileInView={reduce ? undefined : 'show'}
+      viewport={{ once: true, amount: 0.15 }}
+    >
+      {groups.map(([group, items]) => (
+        <motion.div className="tech-group" key={group} variants={reduce ? undefined : stackGroup}>
+          <motion.p variants={reduce ? undefined : stackTag}>{group}</motion.p>
+          <div>
+            {items.map(it => (
+              <motion.span key={it} variants={reduce ? undefined : stackTag}>{it}</motion.span>
+            ))}
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+  )
+}
+
+// Expertise grid with click-to-expand cards. Only the title shows by default;
+// clicking a card reveals its description with a height + fade animation.
+type ExpertiseItem = [string, string]
+
+export function ExpertiseAccordion({ items }: { items: ExpertiseItem[] }) {
+  const reduce = useReducedMotion()
+  const [open, setOpen] = useState<number | null>(null)
+  return (
+    <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {items.map(([title, copy], i) => {
+        const isOpen = open === i
+        return (
+          <button
+            type="button"
+            key={title}
+            aria-expanded={isOpen}
+            className={`profile-card expertise-card${isOpen ? ' is-open' : ''}`}
+            onClick={() => setOpen(isOpen ? null : i)}
+          >
+            <span className="expertise-head">
+              <h3>{title}</h3>
+              <span className="expertise-toggle" aria-hidden="true"><Plus className="size-4" /></span>
+            </span>
+            {reduce ? (
+              isOpen && <p className="expertise-copy">{copy}</p>
+            ) : (
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    className="expertise-panel"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <p className="expertise-copy">{copy}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
+          </button>
+        )
+      })}
+    </div>
   )
 }

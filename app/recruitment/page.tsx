@@ -29,13 +29,13 @@ export default function Recruitment() {
     <SiteShell>
       <main>
         <PageHero
-          eyebrow="VECTORSHIP TALENT"
+          eyebrow="NEXIO TALENT"
           title="Senior tech talent, vetted by engineers and placed fast."
           copy="We help ambitious teams hire the software, AI, cloud, product, and leadership talent they need—through permanent, contract, and contract-to-hire staffing built on the same engineering standard as everything else we do."
         >
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/contact" className="button-primary inline-flex min-h-12 items-center rounded-sm px-5 py-3">Request Talent <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link>
-            <a href="mailto:hello@vectorship.ai?subject=Candidate%20Introduction" className="button-secondary inline-flex min-h-12 items-center rounded-sm px-5 py-3">Join Our Talent Network</a>
+            <a href="mailto:hello@nexio.ai?subject=Candidate%20Introduction" className="button-secondary inline-flex min-h-12 items-center rounded-sm px-5 py-3">Join Our Talent Network</a>
           </div>
         </PageHero>
 

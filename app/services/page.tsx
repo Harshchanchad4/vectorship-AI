@@ -1,6 +1,6 @@
 import { pageMetadata } from '@/lib/metadata'
 import { CTA, PageHero, SectionHeading, SiteShell } from '@/components/site'
-import { CapabilityShowcase } from '@/components/motion-sections'
+import { CapabilityShowcase, TechStack } from '@/components/motion-sections'
 import { Faq } from '@/components/faq'
 import { serviceLinks, techGroups, serviceFaqs } from '@/lib/site-data'
 import Link from 'next/link'
@@ -34,14 +34,7 @@ export default function Services() {
         <section id="technology" className="section approach-section">
           <div className="shell">
             <SectionHeading eyebrow="TECHNOLOGY" title="Deep expertise across the full modern stack." copy="Our team spans every layer of modern software—languages, frameworks, AI, data, and infrastructure. We choose technology based on the problem, not the trend." />
-            <div className="tech-grid mt-12">
-              {techGroups.map(([group, items]) => (
-                <div className="tech-group" key={group}>
-                  <p>{group}</p>
-                  <div>{items.map(item => <span key={item}>{item}</span>)}</div>
-                </div>
-              ))}
-            </div>
+            <TechStack groups={techGroups} />
           </div>
         </section>
 
