@@ -289,6 +289,37 @@ export const recruitmentProcess = [
   ['05', 'Offer & Onboard', 'We manage interviews, salary negotiation, offer coordination, and onboarding—backed by a replacement guarantee.'],
 ]
 
+/* ── Careers ────────────────────────────────────────────────────────────── */
+
+export const careerValues: [string, string][] = [
+  ['Senior-only team', 'You work alongside experienced engineers, not a junior bench. Every project is staffed with specialists who own their craft.'],
+  ['Real ownership', 'You own problems end to end—from the first conversation to production—rather than picking up tickets someone else scoped.'],
+  ['Direct communication', 'No layers of account managers or status theatre. You talk to the people doing the work and to the clients you build for.'],
+  ['Meaningful work', 'We take on serious software and AI problems for ambitious teams, so the work you ship actually matters to a business.'],
+  ['Remote-first, async-friendly', 'Work from where you do your best thinking. We optimize for focus and written clarity over meetings and presence.'],
+  ['Growth without bureaucracy', 'A dedicated learning budget, exposure to modern AI and infra, and a flat structure where good ideas win regardless of title.'],
+]
+
+// [role, team, type, location, copy]
+export const careerOpenings: [string, string, string, string, string][] = []
+
+export const careerProcess = [
+  ['01', 'Application', 'Send your CV or profile and a short note on the kind of problems you want to work on. Every application is read by an engineer.'],
+  ['02', 'Intro Conversation', 'A relaxed call to understand your experience, what you are looking for, and whether the work and team are a genuine fit.'],
+  ['03', 'Technical Deep-Dive', 'A practical, real-world technical conversation or exercise—no trick puzzles, just the kind of work you would actually do here.'],
+  ['04', 'Team & Values Fit', 'A conversation about how you work, communicate, and collaborate, so both sides know the day-to-day will click.'],
+  ['05', 'Offer & Onboarding', 'A clear offer and a structured onboarding that gets you into meaningful work quickly, with support from day one.'],
+]
+
+export const careerFaqs: [string, string][] = [
+  ['Do you hire fully remote?', 'Yes. We are remote-first and async-friendly. Most of the team works fully remotely across time zones—we optimize for focus and written clarity rather than presence.'],
+  ['Do you hire junior engineers?', 'Our client work is staffed senior-only, so most open roles ask for solid experience. We do occasionally open focused positions for exceptional early-career engineers—if that is you, apply and tell us why.'],
+  ['What does your interview process look like?', 'A short intro conversation, a practical technical deep-dive based on real work (no trick puzzles), and a team-fit conversation—then an offer. The whole process is usually wrapped up in a couple of weeks.'],
+  ['What is the tech stack I would work with?', 'It varies by project, but commonly TypeScript, React/Next.js, Node, Python, and Go, with AI work on OpenAI, Anthropic, and open models, and cloud on AWS, GCP, and Kubernetes. We pick the right tool for the problem.'],
+  ['I don’t see a role that fits. Can I still apply?', 'Absolutely. We are always interested in talking to strong engineers, designers, and AI specialists. Send us an open application and tell us what you want to work on—we will reach out if there is a fit.'],
+  ['Do you offer contract or freelance work?', 'Yes. Alongside full-time roles we work with contract and freelance specialists for specific projects. Mention your preferred engagement type when you apply.'],
+]
+
 export const recruitmentFaqs: [string, string][] = [
   ['How quickly can you present candidates?', 'For most roles we deliver a curated shortlist within days, and typically fill positions within 2–4 weeks depending on seniority and specialization.'],
   ['How do you vet candidates before presenting them?', 'Every candidate completes an engineering-led screen: a recruiter interview, technical skills assessment, and reference checks. Because our screening is run by engineers, you only meet people who can actually do the work.'],

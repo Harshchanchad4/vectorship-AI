@@ -21,15 +21,21 @@ export function ContactForm() {
     setError('')
     const fd = new FormData(e.currentTarget)
     const str = (k: string) => (fd.get(k) ?? '').toString().trim()
+    const clean = (v: string) => (v === 'Choose one' ? '' : v)
     const budgetRaw = str('budget')
     const payload = {
       name: str('name'),
       email: str('email'),
+      phone: str('phone'),
+      role: str('role'),
       company: str('company'),
-      type: str('type') === 'Choose one' ? '' : str('type'),
+      website: str('website'),
+      type: clean(str('type')),
+      services: fd.getAll('services').map(s => s.toString()).join(', '),
       problem: str('problem'),
-      timeline: str('timeline') === 'Choose one' ? '' : str('timeline'),
-      budget: budgetRaw === 'Custom range' ? str('budgetCustom') : budgetRaw === 'Choose one' ? '' : budgetRaw,
+      timeline: clean(str('timeline')),
+      budget: budgetRaw === 'Custom range' ? str('budgetCustom') : clean(budgetRaw),
+      referral: clean(str('referral')),
       company_url: str('company_url'), // honeypot — must stay empty
     }
 
@@ -60,14 +66,27 @@ export function ContactForm() {
         style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
       />
       <div className="form-row">
-        <label>Full Name<input required name="name" /></label>
-        <label>Work Email<input required type="email" name="email" /></label>
+        <label>Full Name<input required name="name" autoComplete="name" /></label>
+        <label>Work Email<input required type="email" name="email" autoComplete="email" /></label>
       </div>
       <div className="form-row">
-        <label>Company<input name="company" /></label>
-        <label>Project Type<select name="type"><option>Choose one</option><option>AI &amp; automation</option><option>Software engineering</option><option>Mobile</option><option>Cloud &amp; DevOps</option></select></label>
+        <label>Phone <span className="form-optional">(optional)</span><input type="tel" name="phone" autoComplete="tel" /></label>
+        <label>Your Role <span className="form-optional">(optional)</span><input name="role" placeholder="e.g. Founder, CTO, Product Lead" /></label>
       </div>
-      <label>What are you trying to solve?<textarea required name="problem" rows={5} /></label>
+      <div className="form-row">
+        <label>Company <span className="form-optional">(optional)</span><input name="company" autoComplete="organization" /></label>
+        <label>Company Website <span className="form-optional">(optional)</span><input type="url" name="website" placeholder="https://" autoComplete="url" /></label>
+      </div>
+      <label>Project Type<select name="type"><option>Choose one</option><option>AI &amp; automation</option><option>Software engineering</option><option>Mobile</option><option>Cloud &amp; DevOps</option></select></label>
+      <fieldset className="form-fieldset">
+        <span className="form-field-label">What do you need help with? <span className="form-optional">(select any)</span></span>
+        <div className="form-checks">
+          {['AI & automation', 'Software engineering', 'Mobile', 'Cloud & DevOps', 'Data & analytics', 'Recruitment / talent'].map(s => (
+            <label className="form-check" key={s}><input type="checkbox" name="services" value={s} /><span>{s}</span></label>
+          ))}
+        </div>
+      </fieldset>
+      <label>What are you trying to solve?<textarea required name="problem" rows={6} placeholder="Describe the problem, what you've tried, and what a good outcome looks like." /></label>
       <div className="form-row">
         <label>Expected Timeline<select name="timeline"><option>Choose one</option><option>Exploring</option><option>Next 1–3 months</option><option>Immediate</option></select></label>
         <label>Budget Range
@@ -83,9 +102,20 @@ export function ContactForm() {
       {budget === 'Custom range' && (
         <label>Your budget range<input required name="budgetCustom" placeholder="e.g. $40k–$60k, or around $120k" /></label>
       )}
+      <label>How did you hear about us? <span className="form-optional">(optional)</span>
+        <select name="referral">
+          <option>Choose one</option>
+          <option>Google / search</option>
+          <option>Referral</option>
+          <option>LinkedIn</option>
+          <option>Social media</option>
+          <option>Blog / article</option>
+          <option>Other</option>
+        </select>
+      </label>
       {error && <p className="form-error">{error}</p>}
-      <Button className="button-primary min-h-12 w-fit rounded-sm px-5 py-3" type="submit" disabled={loading}>
-        {loading ? 'Sending…' : <>Send Project Brief <Send className="ml-2 size-4 shrink-0" /></>}
+      <Button className="button-primary mx-auto mt-2 min-h-14 w-fit rounded-sm px-10 py-4 text-base" type="submit" disabled={loading}>
+        {loading ? 'Sending…' : <>Send Project Brief <Send className="ml-2 size-5 shrink-0" /></>}
       </Button>
     </form>
   )

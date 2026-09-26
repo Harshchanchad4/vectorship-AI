@@ -52,11 +52,16 @@ function clientIp(request: Request): string {
 type Brief = {
   name: string
   email: string
+  phone: string
+  role: string
   company: string
+  website: string
   type: string
+  services: string
   timeline: string
   budget: string
   problem: string
+  referral: string
 }
 
 // Returns true/false when configured, or null when this sink is switched off.
@@ -67,10 +72,15 @@ async function sendEmail(b: Brief): Promise<boolean | null> {
   const fields: [string, string][] = [
     ['Name', b.name],
     ['Email', b.email],
+    ['Phone', b.phone || '—'],
+    ['Role', b.role || '—'],
     ['Company', b.company || '—'],
+    ['Website', b.website || '—'],
     ['Project type', b.type || '—'],
+    ['Needs', b.services || '—'],
     ['Timeline', b.timeline || '—'],
     ['Budget', b.budget || '—'],
+    ['Heard via', b.referral || '—'],
   ]
   const rows = fields.map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#8d9aaa;font:14px/1.5 sans-serif;vertical-align:top">${esc(k)}</td><td style="padding:6px 0;color:#0b0f14;font:14px/1.5 sans-serif">${esc(v)}</td></tr>`).join('')
   const html = `<div style="max-width:560px"><h2 style="font:600 18px sans-serif;color:#0b0f14">New project brief</h2><table style="border-collapse:collapse;margin:12px 0">${rows}</table><p style="color:#8d9aaa;font:14px sans-serif;margin:16px 0 4px">What they're trying to solve</p><p style="color:#0b0f14;font:14px/1.7 sans-serif;white-space:pre-wrap">${esc(b.problem)}</p></div>`
@@ -125,10 +135,15 @@ async function sendToFormBackend(b: Brief): Promise<boolean | null> {
       body: JSON.stringify({
         name: b.name,
         email: b.email,
+        phone: b.phone,
+        role: b.role,
         company: b.company,
+        website: b.website,
         'project type': b.type,
+        needs: b.services,
         timeline: b.timeline,
         budget: b.budget,
+        'heard via': b.referral,
         message: b.problem,
       }),
     })
@@ -171,11 +186,16 @@ export async function POST(request: Request) {
   const brief: Brief = {
     name: get('name'),
     email: get('email'),
+    phone: get('phone'),
+    role: get('role'),
     company: get('company'),
+    website: get('website'),
     type: get('type'),
+    services: get('services'),
     timeline: get('timeline'),
     budget: get('budget'),
     problem: get('problem'),
+    referral: get('referral'),
   }
   if (!brief.name || !brief.email || !brief.problem) {
     return Response.json({ error: 'Name, email, and project details are required.' }, { status: 400 })
