@@ -34,6 +34,7 @@ export function Logo() { return <Link href="/" className="flex items-center gap-
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [openSection, setOpenSection] = useState<string | null>(null)
   const pathname = usePathname()
   const isActive = (href: string) => pathname === href || pathname?.startsWith(href + '/')
 
@@ -44,6 +45,16 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Lock body scroll while the mobile menu is open, and auto-expand the section
+  // matching the current route so the active page is visible without a tap.
+  useEffect(() => {
+    if (!open) return
+    const active = navItems.find(n => n.children && (pathname === n.href || pathname?.startsWith(n.href + '/')))
+    setOpenSection(active?.href ?? null)
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [open, pathname])
+
   return <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`}>
     <div className="shell flex h-18 items-center justify-between"><Logo /><nav className="hidden items-center gap-8 md:flex" aria-label="Primary">{navItems.map(({ label, href, children }) => children ? (
       <div className="nav-item-has-children" key={href}>
@@ -53,11 +64,44 @@ export function Navbar() {
             <Link key={c.href} href={c.href} className="nav-dropdown-item"><span className="nav-dropdown-icon"><Icon className="size-[18px]" aria-hidden="true" /></span><span className="nav-dropdown-text"><span>{c.title}</span><small>{c.copy}</small></span></Link>
           )})}</div>
           <Link href="/contact" className="nav-dropdown-cta"><span className="nav-dropdown-cta-eyebrow">DON&apos;T SEE YOURS?</span><strong>Tell us what you&apos;re building.</strong><p>Share the problem and we&apos;ll map the right approach.</p><span className="card-link mt-0!">Get in touch <ArrowUpRight className="size-4" /></span></Link>
-          <div className="nav-dropdown-foot"><span>{children.length} OPTIONS</span><Link href={href} className="card-link mt-0!">View all {label.toLowerCase()} <ArrowUpRight className="size-4" /></Link></div>
+          <div className="nav-dropdown-foot"><Link href={href} className="card-link mt-0!">View all {label.toLowerCase()} <ArrowUpRight className="size-4" /></Link></div>
         </div></div>
       </div>
     ) : <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} className={isActive(href) ? 'nav-link-active' : ''}>{label}</Link>)}</nav><div className="hidden md:block"><Link href="/contact" className="button-primary inline-flex min-h-10 items-center rounded-sm px-4 py-2 text-sm">Let&apos;s Talk <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link></div><button className="inline-flex size-10 shrink-0 items-center justify-center rounded-sm border border-border md:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div>
-    {open && <nav className="mobile-menu shell flex flex-col border-t border-border py-6 md:hidden" aria-label="Mobile primary">{navItems.map(({ label, href, children }, i) => <div className="mobile-nav-row" key={href}><Link href={href} aria-current={isActive(href) ? 'page' : undefined} className={`mobile-nav-link ${isActive(href) ? 'nav-link-active' : ''}`} style={{ animationDelay: `${i * 40}ms` }} onClick={() => setOpen(false)}><span className="mobile-nav-num">{String(i + 1).padStart(2, '0')}</span><span>{label}</span><ChevronRight className="mobile-nav-arrow" aria-hidden="true" /></Link>{children && <div className="mobile-nav-children">{children.map(c => <Link key={c.href} href={c.href} className="mobile-nav-child" onClick={() => setOpen(false)}>{c.title}</Link>)}</div>}</div>)}<Link href="/contact" onClick={() => setOpen(false)} className="button-primary mobile-nav-cta inline-flex min-h-12 items-center justify-center rounded-sm px-4 py-2 text-sm" style={{ animationDelay: `${navItems.length * 40}ms` }}>Let&apos;s Talk <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link></nav>}
+    {open && <nav className="mobile-menu shell border-t border-border md:hidden" aria-label="Mobile primary">
+      <ul className="mobile-nav-list">{navItems.map(({ label, href, children }, i) => {
+        const num = String(i + 1).padStart(2, '0')
+        const rowActive = isActive(href)
+        if (!children) return (
+          <li className="mobile-nav-row" key={href} style={{ animationDelay: `${i * 45}ms` }}>
+            <Link href={href} aria-current={rowActive ? 'page' : undefined} className={`mobile-nav-link ${rowActive ? 'is-active' : ''}`} onClick={() => setOpen(false)}>
+              <span className="mobile-nav-num">{num}</span><span className="mobile-nav-label">{label}</span><ChevronRight className="mobile-nav-go" aria-hidden="true" />
+            </Link>
+          </li>
+        )
+        const expanded = openSection === href
+        return (
+          <li className={`mobile-nav-row ${expanded ? 'is-expanded' : ''}`} key={href} style={{ animationDelay: `${i * 45}ms` }}>
+            <div className="mobile-nav-head">
+              <Link href={href} aria-current={rowActive ? 'page' : undefined} className={`mobile-nav-link ${rowActive ? 'is-active' : ''}`} onClick={() => setOpen(false)}>
+                <span className="mobile-nav-num">{num}</span><span className="mobile-nav-label">{label}</span>
+              </Link>
+              <button type="button" className="mobile-nav-toggle" aria-expanded={expanded} aria-label={`${expanded ? 'Collapse' : 'Expand'} ${label}`} onClick={() => setOpenSection(expanded ? null : href)}>
+                <ChevronDown className="mobile-nav-chevron" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="mobile-nav-sub" data-open={expanded}>
+              <div className="mobile-nav-sub-inner">{children.map(c => { const Icon = navIcons[c.href] ?? ChevronRight; return (
+                <Link key={c.href} href={c.href} className={`mobile-nav-child ${isActive(c.href) ? 'is-active' : ''}`} onClick={() => setOpen(false)}>
+                  <span className="mobile-nav-child-icon"><Icon className="size-[17px]" aria-hidden="true" /></span><span>{c.title}</span>
+                </Link>
+              )})}</div>
+            </div>
+          </li>
+        )
+      })}</ul>
+      <Link href="/contact" onClick={() => setOpen(false)} className="button-primary mobile-nav-cta inline-flex min-h-12 items-center justify-center rounded-sm px-4 py-2 text-sm" style={{ animationDelay: `${navItems.length * 45}ms` }}>Let&apos;s Talk <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link>
+    </nav>}
   </header>
 }
 

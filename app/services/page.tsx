@@ -3,8 +3,6 @@ import { CTA, SectionHeading, SiteShell } from '@/components/site'
 import { CapabilityShowcase, TechStack, ServicesHero, EngagementModels } from '@/components/motion-sections'
 import { Faq } from '@/components/faq'
 import { serviceLinks, techGroups, serviceFaqs, processSteps } from '@/lib/site-data'
-import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
 
 export const metadata = pageMetadata('Software Engineering & AI Development Services', 'End-to-end AI development, software engineering, mobile app development, and cloud DevOps services for ambitious teams.', '/services')
 
@@ -54,9 +52,8 @@ export default function Services() {
 
         <section id="engagement" className="section approach-section">
           <div className="shell">
-            <SectionHeading eyebrow="HOW WE ENGAGE" title="Flexible engagement models, consistent ownership." copy="However we plug into your team, the standard stays the same—senior engineers who own the outcome end to end." />
+            <SectionHeading eyebrow="HOW WE ENGAGE" title="Flexible engagement models, consistent ownership." copy="However we plug into your team, the standard stays the same—senior engineers who own the outcome end to end." action={{ label: "Tell us what you're building", href: '/contact' }} />
             <EngagementModels items={engagementModels} />
-            <Link href="/contact" className="card-link">Tell us what you&apos;re building <ArrowUpRight className="size-4" /></Link>
           </div>
         </section>
 

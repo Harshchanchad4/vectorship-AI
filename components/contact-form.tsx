@@ -66,18 +66,18 @@ export function ContactForm() {
         style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
       />
       <div className="form-row">
-        <label>Full Name<input required name="name" autoComplete="name" /></label>
-        <label>Work Email<input required type="email" name="email" autoComplete="email" /></label>
+        <label><span className="field-label">Full Name</span><input required name="name" autoComplete="name" /></label>
+        <label><span className="field-label">Work Email</span><input required type="email" name="email" autoComplete="email" /></label>
       </div>
       <div className="form-row">
-        <label>Phone <span className="form-optional">(optional)</span><input type="tel" name="phone" autoComplete="tel" /></label>
-        <label>Your Role <span className="form-optional">(optional)</span><input name="role" placeholder="e.g. Founder, CTO, Product Lead" /></label>
+        <label><span className="field-label">Phone <span className="form-optional">optional</span></span><input type="tel" name="phone" autoComplete="tel" /></label>
+        <label><span className="field-label">Your Role <span className="form-optional">optional</span></span><input name="role" placeholder="e.g. Founder, CTO, Product Lead" /></label>
       </div>
       <div className="form-row">
-        <label>Company <span className="form-optional">(optional)</span><input name="company" autoComplete="organization" /></label>
-        <label>Company Website <span className="form-optional">(optional)</span><input type="url" name="website" placeholder="https://" autoComplete="url" /></label>
+        <label><span className="field-label">Company <span className="form-optional">optional</span></span><input name="company" autoComplete="organization" /></label>
+        <label><span className="field-label">Company Website <span className="form-optional">optional</span></span><input type="url" name="website" placeholder="https://" autoComplete="url" /></label>
       </div>
-      <label>Project Type<select name="type"><option>Choose one</option><option>AI &amp; automation</option><option>Software engineering</option><option>Mobile</option><option>Cloud &amp; DevOps</option></select></label>
+      <label><span className="field-label">Project Type</span><select name="type"><option>Choose one</option><option>AI &amp; automation</option><option>Software engineering</option><option>Mobile</option><option>Cloud &amp; DevOps</option></select></label>
       <fieldset className="form-fieldset">
         <span className="form-field-label">What do you need help with? <span className="form-optional">(select any)</span></span>
         <div className="form-checks">
@@ -86,10 +86,10 @@ export function ContactForm() {
           ))}
         </div>
       </fieldset>
-      <label>What are you trying to solve?<textarea required name="problem" rows={6} placeholder="Describe the problem, what you've tried, and what a good outcome looks like." /></label>
+      <label><span className="field-label">What are you trying to solve?</span><textarea required name="problem" rows={6} placeholder="Describe the problem, what you've tried, and what a good outcome looks like." /></label>
       <div className="form-row">
-        <label>Expected Timeline<select name="timeline"><option>Choose one</option><option>Exploring</option><option>Next 1–3 months</option><option>Immediate</option></select></label>
-        <label>Budget Range
+        <label><span className="field-label">Expected Timeline</span><select name="timeline"><option>Choose one</option><option>Exploring</option><option>Next 1–3 months</option><option>Immediate</option></select></label>
+        <label><span className="field-label">Budget Range</span>
           <select name="budget" value={budget} onChange={e => setBudget(e.target.value)}>
             <option>Choose one</option>
             <option>$10k–$25k</option>
@@ -100,9 +100,9 @@ export function ContactForm() {
         </label>
       </div>
       {budget === 'Custom range' && (
-        <label>Your budget range<input required name="budgetCustom" placeholder="e.g. $40k–$60k, or around $120k" /></label>
+        <label><span className="field-label">Your budget range</span><input required name="budgetCustom" placeholder="e.g. $40k–$60k, or around $120k" /></label>
       )}
-      <label>How did you hear about us? <span className="form-optional">(optional)</span>
+      <label><span className="field-label">How did you hear about us? <span className="form-optional">optional</span></span>
         <select name="referral">
           <option>Choose one</option>
           <option>Google / search</option>
