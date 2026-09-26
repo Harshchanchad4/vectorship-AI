@@ -1,9 +1,10 @@
 import { pageMetadata } from '@/lib/metadata'
-import { CTA, PageHero, SectionHeading, SiteShell } from '@/components/site'
-import { CapabilityShowcase, TechStack } from '@/components/motion-sections'
+import { CTA, SectionHeading, SiteShell } from '@/components/site'
+import { CapabilityShowcase, TechStack, ServicesHero, EngagementModels } from '@/components/motion-sections'
 import { Faq } from '@/components/faq'
-import { serviceLinks, techGroups, serviceFaqs } from '@/lib/site-data'
+import { serviceLinks, techGroups, serviceFaqs, processSteps } from '@/lib/site-data'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 export const metadata = pageMetadata('Software Engineering & AI Development Services', 'End-to-end AI development, software engineering, mobile app development, and cloud DevOps services for ambitious teams.', '/services')
 
@@ -24,7 +25,7 @@ export default function Services() {
   return (
     <SiteShell>
       <main>
-        <PageHero title="Software engineering & AI development services built for real business problems." copy="Nexio provides end-to-end AI development, software engineering, mobile, and cloud DevOps services for teams that need clarity, speed, and ownership from idea through production." />
+        <ServicesHero />
 
         <section id="capabilities" className="section shell">
           <SectionHeading eyebrow="WHAT WE DO" title="A senior software engineering partner for the work that matters." copy="Pick a capability to see how we approach it—or let it cycle through everything we build." />
@@ -38,24 +39,30 @@ export default function Services() {
           </div>
         </section>
 
-        <section id="engagement" className="section shell">
-          <SectionHeading eyebrow="HOW WE ENGAGE" title="Flexible engagement models, consistent ownership." />
-          <div className="mt-12 grid gap-4 md:grid-cols-2">
-            {engagementModels.map(([title, copy]) => (
-              <article className="profile-card" key={title}>
+        <section id="process" className="section shell">
+          <SectionHeading eyebrow="HOW WE DELIVER" title="A process built to think clearly and ship quickly." copy="Every engagement moves through the same clear path—so you always know where things stand and what happens next." action={{ label: 'How we work', href: '/about#method' }} />
+          <div className="process-grid">
+            {processSteps.map(([number, title, copy]) => (
+              <article className="process-step" key={number}>
+                <span className="process-number">{number}</span>
                 <h3>{title}</h3>
                 <p>{copy}</p>
               </article>
             ))}
           </div>
-          <Link href="/contact" className="card-link">Tell us what you&apos;re building <span>→</span></Link>
         </section>
 
-        <section id="faq" className="section approach-section">
+        <section id="engagement" className="section approach-section">
           <div className="shell">
-            <SectionHeading eyebrow="FAQ" title="Common questions about working with a software development company." />
-            <Faq items={serviceFaqs} />
+            <SectionHeading eyebrow="HOW WE ENGAGE" title="Flexible engagement models, consistent ownership." copy="However we plug into your team, the standard stays the same—senior engineers who own the outcome end to end." />
+            <EngagementModels items={engagementModels} />
+            <Link href="/contact" className="card-link">Tell us what you&apos;re building <ArrowUpRight className="size-4" /></Link>
           </div>
+        </section>
+
+        <section id="faq" className="section shell">
+          <SectionHeading eyebrow="FAQ" title="Common questions about working with a software development company." />
+          <Faq items={serviceFaqs} />
         </section>
 
         <CTA />

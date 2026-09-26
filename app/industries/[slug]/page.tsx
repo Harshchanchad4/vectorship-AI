@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowUpRight, Check } from 'lucide-react'
-import { CTA, PageHero, SectionHeading, SiteShell } from '@/components/site'
+import { CTA, SectionHeading, SiteShell } from '@/components/site'
+import { SplitHero } from '@/components/motion-sections'
 import { Faq } from '@/components/faq'
 import { pageMetadata } from '@/lib/metadata'
 import { industryData } from '@/lib/site-data'
@@ -46,10 +47,21 @@ export default async function IndustryDetail({ params }: { params: Promise<{ slu
   return (
     <SiteShell>
       <main>
-        <PageHero eyebrow={item.eyebrow} title={item.title} copy={item.copy}>
-          <Link href="/contact" className="card-link">Discuss your project <ArrowUpRight className="size-4" /></Link>
-        </PageHero>
-        <section className="section shell">
+        <SplitHero
+          eyebrow={item.eyebrow}
+          title={item.title}
+          copy={item.copy}
+          primary={{ label: 'Discuss your project', href: '/contact' }}
+          secondary={{ label: 'What we build', href: '#build' }}
+        >
+          <p className="svc-panel-label">What we build</p>
+          <ul className="svc-panel-list">
+            {item.sections.map(([sectionTitle], i) => (
+              <li key={sectionTitle}><span className="svc-panel-idx">{String(i + 1).padStart(2, '0')}</span> {sectionTitle}</li>
+            ))}
+          </ul>
+        </SplitHero>
+        <section id="build" className="section shell">
           <SectionHeading eyebrow="WHAT WE BUILD" title="Solutions tuned to your domain." />
           <div className="tag-list large-tags mt-10">{item.items.map(i => <span key={i}>{i}</span>)}</div>
           <div className="detail-sections mt-20">

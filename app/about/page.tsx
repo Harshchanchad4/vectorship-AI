@@ -1,5 +1,77 @@
-import { CTA, PageHero, SectionHeading, SiteShell } from '@/components/site'
+import { CTA, SectionHeading, SiteShell } from '@/components/site'
+import { SplitHero } from '@/components/motion-sections'
 import { processSteps } from '@/lib/site-data'
 import { pageMetadata } from '@/lib/metadata'
-export const metadata=pageMetadata('About Our Software Development Company','Nexio is a B2B software development and AI automation company helping ambitious teams design, build, and scale digital products.','/about')
-export default function About(){return <SiteShell><main><PageHero title="A software development company built to move your business forward." copy="Nexio is a B2B software engineering and AI automation company helping ambitious teams design, build, automate, and scale digital products."/><section id="who-we-are" className="section shell"><div className="overlap-banner"><div><p className="eyebrow">WHO WE ARE</p><h2>A senior software engineering team for meaningful technical work.</h2><p>Nexio is a collective of senior engineers spanning frontend, backend, mobile, AI, data, and DevOps—working with startups, growing companies, founders, and operations leaders who need custom software and AI agents to create momentum, not more complexity.</p></div><div className="overlap-stats"><div><strong>6</strong><span>DISCIPLINES</span><small>Frontend, backend, mobile, AI, data, and DevOps under one roof.</small></div><div><strong>0</strong><span>JUNIOR BENCH</span><small>Every project is staffed with the specialists it actually needs.</small></div><div><strong>Direct</strong><span>COMMUNICATION</span><small>You talk to the engineers doing the work, not account managers.</small></div><div><strong>Day 1</strong><span>OWNERSHIP</span><small>We take ownership from the first conversation through deployment.</small></div></div></div></section><section id="values" className="section shell"><SectionHeading eyebrow="WHAT WE BELIEVE" title="The values behind every software project we deliver."/><div className="mt-12 grid gap-4 md:grid-cols-3">{[['Ownership','We take responsibility for outcomes.'],['Clarity','We communicate directly and honestly.'],['Speed','We keep feedback loops short.'],['Craft','We care about engineering quality.'],['Practical Innovation','We use new technology when it creates real value.'],['Client Success','The outcome matters more than the code.']].map(([title,copy])=><article className="profile-card" key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></section><section id="method" className="section approach-section"><div className="shell"><SectionHeading eyebrow="THE NEXIO METHOD" title="Five stages of software delivery. One accountable team."/><div className="detail-sections process-detail mt-12">{processSteps.map(([n,title,copy])=><article key={n}><span className="process-number">{n}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div></div></section><section id="communication" className="section shell"><SectionHeading eyebrow="OUR COMMUNICATION STANDARD" title="No surprises. No black boxes." copy="Clear, consistent communication is part of how we deliver software—so you always know where your project stands."/><div className="mt-12 grid gap-4 md:grid-cols-3">{[['Clear milestones','Defined project milestones so you always know what ships next.'],['Direct communication','Talk directly to the engineers building your software.'],['Proactive risk reporting','We flag technical risks early, before they affect your timeline.'],['Regular demos','See working software in regular demos, not just status updates.'],['Written decisions','Key technical decisions documented in writing for full traceability.'],['Transparent progress','Track real progress with honest, visible project updates.']].map(([title,copy])=><article className="profile-card" key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></section><CTA /></main></SiteShell>}
+
+export const metadata = pageMetadata('About Our Software Development Company', 'Nexio is a B2B software development and AI automation company helping ambitious teams design, build, and scale digital products.', '/about')
+
+export default function About() {
+  return (
+    <SiteShell>
+      <main>
+        <SplitHero
+          eyebrow="ABOUT NEXIO"
+          title="A software development company built to move your business forward."
+          copy="Nexio is a B2B software engineering and AI automation company helping ambitious teams design, build, automate, and scale digital products."
+          primary={{ label: 'Start a Project', href: '/contact' }}
+          secondary={{ label: 'See our method', href: '#method' }}
+          trust={['Senior-only team', 'Direct communication', 'Full ownership']}
+        >
+          <p className="svc-panel-label">The Nexio method</p>
+          <ul className="svc-panel-list">
+            {processSteps.map(([n, title]) => (
+              <li key={title}><span className="svc-panel-idx">{n}</span> {title}</li>
+            ))}
+          </ul>
+        </SplitHero>
+
+        <section id="who-we-are" className="section shell">
+          <div className="overlap-banner">
+            <div>
+              <p className="eyebrow">WHO WE ARE</p>
+              <h2>A senior software engineering team for meaningful technical work.</h2>
+              <p>Nexio is a collective of senior engineers spanning frontend, backend, mobile, AI, data, and DevOps—working with startups, growing companies, founders, and operations leaders who need custom software and AI agents to create momentum, not more complexity.</p>
+            </div>
+            <div className="overlap-stats">
+              <div><strong>6</strong><span>DISCIPLINES</span><small>Frontend, backend, mobile, AI, data, and DevOps under one roof.</small></div>
+              <div><strong>0</strong><span>JUNIOR BENCH</span><small>Every project is staffed with the specialists it actually needs.</small></div>
+              <div><strong>Direct</strong><span>COMMUNICATION</span><small>You talk to the engineers doing the work, not account managers.</small></div>
+              <div><strong>Day 1</strong><span>OWNERSHIP</span><small>We take ownership from the first conversation through deployment.</small></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="values" className="section shell">
+          <SectionHeading eyebrow="WHAT WE BELIEVE" title="The values behind every software project we deliver." />
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {[['Ownership', 'We take responsibility for outcomes.'], ['Clarity', 'We communicate directly and honestly.'], ['Speed', 'We keep feedback loops short.'], ['Craft', 'We care about engineering quality.'], ['Practical Innovation', 'We use new technology when it creates real value.'], ['Client Success', 'The outcome matters more than the code.']].map(([title, copy]) => (
+              <article className="profile-card" key={title}><h3>{title}</h3><p>{copy}</p></article>
+            ))}
+          </div>
+        </section>
+
+        <section id="method" className="section approach-section">
+          <div className="shell">
+            <SectionHeading eyebrow="THE NEXIO METHOD" title="Five stages of software delivery. One accountable team." />
+            <div className="detail-sections process-detail mt-12">
+              {processSteps.map(([n, title, copy]) => (
+                <article key={n}><span className="process-number">{n}</span><div><h3>{title}</h3><p>{copy}</p></div></article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="communication" className="section shell">
+          <SectionHeading eyebrow="OUR COMMUNICATION STANDARD" title="No surprises. No black boxes." copy="Clear, consistent communication is part of how we deliver software—so you always know where your project stands." />
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {[['Clear milestones', 'Defined project milestones so you always know what ships next.'], ['Direct communication', 'Talk directly to the engineers building your software.'], ['Proactive risk reporting', 'We flag technical risks early, before they affect your timeline.'], ['Regular demos', 'See working software in regular demos, not just status updates.'], ['Written decisions', 'Key technical decisions documented in writing for full traceability.'], ['Transparent progress', 'Track real progress with honest, visible project updates.']].map(([title, copy]) => (
+              <article className="profile-card" key={title}><h3>{title}</h3><p>{copy}</p></article>
+            ))}
+          </div>
+        </section>
+
+        <CTA />
+      </main>
+    </SiteShell>
+  )
+}

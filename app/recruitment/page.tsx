@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { ArrowUpRight, BadgeCheck, Gauge, ShieldCheck, UserCheck } from 'lucide-react'
-import { CTA, CardGrid, PageHero, SectionHeading, SiteShell } from '@/components/site'
+import { BadgeCheck, Gauge, ShieldCheck, UserCheck } from 'lucide-react'
+import { CTA, CardGrid, SectionHeading, SiteShell } from '@/components/site'
+import { SplitHero } from '@/components/motion-sections'
 import { Faq } from '@/components/faq'
 import { industries, recruitmentFaqs, recruitmentModels, recruitmentProcess, recruitmentRoles } from '@/lib/site-data'
 import { pageMetadata } from '@/lib/metadata'
@@ -28,16 +28,23 @@ export default function Recruitment() {
   return (
     <SiteShell>
       <main>
-        <PageHero
+        <SplitHero
           eyebrow="NEXIO TALENT"
           title="Senior tech talent, vetted by engineers and placed fast."
           copy="We help ambitious teams hire the software, AI, cloud, product, and leadership talent they need—through permanent, contract, and contract-to-hire staffing built on the same engineering standard as everything else we do."
+          primary={{ label: 'Request Talent', href: '/contact' }}
+          secondary={{ label: 'View staffing models', href: '#staffing-models' }}
+          trust={['Engineer-led vetting', 'Replacement guarantee', 'Compliance handled']}
         >
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/contact" className="button-primary inline-flex min-h-12 items-center rounded-sm px-5 py-3">Request Talent <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link>
-            <a href="mailto:hello@nexio.ai?subject=Candidate%20Introduction" className="button-secondary inline-flex min-h-12 items-center rounded-sm px-5 py-3">Join Our Talent Network</a>
+          <p className="svc-panel-label">Talent snapshot</p>
+          <div className="svc-stats">
+            <div className="svc-stat"><strong>2–4</strong><span>Weeks to fill a role</span></div>
+            <div className="svc-stat"><strong>Days</strong><span>To a curated shortlist</span></div>
+            <div className="svc-stat"><strong>EOR</strong><span>Payroll &amp; compliance handled</span></div>
+            <div className="svc-stat"><strong>Backed</strong><span>Replacement guarantee</span></div>
           </div>
-        </PageHero>
+          <p className="svc-panel-flow">Calibrate <span>→</span> Source <span>→</span> Vet <span>→</span> Shortlist <span>→</span> Onboard</p>
+        </SplitHero>
 
         <section id="staffing-models" className="section shell">
           <SectionHeading eyebrow="STAFFING MODELS" title="Hire the way that fits the work—not the other way around." copy="Whether you need one specialist for a sprint or a permanent leader for the next stage, we match the engagement model to your risk, timeline, and budget." />

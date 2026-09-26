@@ -49,7 +49,7 @@ export function Navbar() {
       <div className="nav-item-has-children" key={href}>
         <Link href={href} aria-current={isActive(href) ? 'page' : undefined} className={isActive(href) ? 'nav-link-active' : ''}>{label} <ChevronDown className="nav-caret" aria-hidden="true" /></Link>
         <div className="nav-dropdown"><div className="nav-dropdown-panel">
-          <div className="nav-dropdown-grid" style={{ gridTemplateColumns: `repeat(${Math.ceil(children.length / 2)}, minmax(0, 1fr))` }}>{children.map(c => { const Icon = navIcons[c.href] ?? ChevronRight; return (
+          <div className="nav-dropdown-grid">{children.map(c => { const Icon = navIcons[c.href] ?? ChevronRight; return (
             <Link key={c.href} href={c.href} className="nav-dropdown-item"><span className="nav-dropdown-icon"><Icon className="size-[18px]" aria-hidden="true" /></span><span className="nav-dropdown-text"><span>{c.title}</span><small>{c.copy}</small></span></Link>
           )})}</div>
           <Link href="/contact" className="nav-dropdown-cta"><span className="nav-dropdown-cta-eyebrow">DON&apos;T SEE YOURS?</span><strong>Tell us what you&apos;re building.</strong><p>Share the problem and we&apos;ll map the right approach.</p><span className="card-link mt-0!">Get in touch <ArrowUpRight className="size-4" /></span></Link>
@@ -127,7 +127,21 @@ function ScrollReveal() {
     }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' })
 
     targets.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
+
+    // Belt-and-suspenders: reveal anything already within the viewport on mount
+    // (covers hash-jumps and above-the-fold content where the observer may not
+    // fire), and a final safety net so content can never stay stuck invisible.
+    const vh = window.innerHeight
+    targets.forEach(el => {
+      const r = el.getBoundingClientRect()
+      if (r.top < vh && r.bottom > 0) {
+        el.classList.add('is-visible')
+        observer.unobserve(el)
+      }
+    })
+    const safety = window.setTimeout(() => targets.forEach(el => el.classList.add('is-visible')), 1200)
+
+    return () => { observer.disconnect(); clearTimeout(safety) }
   }, [pathname])
 
   return null
