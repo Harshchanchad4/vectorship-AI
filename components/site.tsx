@@ -45,18 +45,16 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Lock body scroll while the mobile menu is open, and auto-expand the section
-  // matching the current route so the active page is visible without a tap.
+  // Lock body scroll while the mobile menu is open. Start with every section
+  // collapsed, and reset back to collapsed whenever the menu closes.
   useEffect(() => {
-    if (!open) return
-    const active = navItems.find(n => n.children && (pathname === n.href || pathname?.startsWith(n.href + '/')))
-    setOpenSection(active?.href ?? null)
+    if (!open) { setOpenSection(null); return }
     document.body.style.overflow = 'hidden'
     return () => { document.body.style.overflow = '' }
-  }, [open, pathname])
+  }, [open])
 
   return <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`}>
-    <div className="shell flex h-18 items-center justify-between"><Logo /><nav className="hidden items-center gap-8 md:flex" aria-label="Primary">{navItems.map(({ label, href, children }) => children ? (
+    <div className="shell flex h-18 items-center justify-between"><Logo /><nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">{navItems.map(({ label, href, children }) => children ? (
       <div className="nav-item-has-children" key={href}>
         <Link href={href} aria-current={isActive(href) ? 'page' : undefined} className={isActive(href) ? 'nav-link-active' : ''}>{label} <ChevronDown className="nav-caret" aria-hidden="true" /></Link>
         <div className="nav-dropdown"><div className="nav-dropdown-panel">
@@ -67,8 +65,8 @@ export function Navbar() {
           <div className="nav-dropdown-foot"><Link href={href} className="card-link mt-0!">View all {label.toLowerCase()} <ArrowUpRight className="size-4" /></Link></div>
         </div></div>
       </div>
-    ) : <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} className={isActive(href) ? 'nav-link-active' : ''}>{label}</Link>)}</nav><div className="hidden md:block"><Link href="/contact" className="button-primary inline-flex min-h-10 items-center rounded-sm px-4 py-2 text-sm">Let&apos;s Talk <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link></div><button className="inline-flex size-10 shrink-0 items-center justify-center rounded-sm border border-border md:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div>
-    {open && <nav className="mobile-menu shell border-t border-border md:hidden" aria-label="Mobile primary">
+    ) : <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} className={isActive(href) ? 'nav-link-active' : ''}>{label}</Link>)}</nav><div className="hidden lg:block"><Link href="/contact" className="button-primary inline-flex min-h-10 items-center rounded-sm px-4 py-2 text-sm">Let&apos;s Talk <ArrowUpRight className="ml-2 size-4 shrink-0" /></Link></div><button className="inline-flex size-10 shrink-0 items-center justify-center rounded-sm border border-border lg:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div>
+    {open && <nav className="mobile-menu shell border-t border-border lg:hidden" aria-label="Mobile primary">
       <ul className="mobile-nav-list">{navItems.map(({ label, href, children }, i) => {
         const num = String(i + 1).padStart(2, '0')
         const rowActive = isActive(href)
@@ -106,7 +104,7 @@ export function Navbar() {
 }
 
 function FooterAccordion({ title, links }: { title: string; links: [string, string][] }) {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   return (
     <div className="footer-col footer-accordion">
       <button type="button" className="footer-accordion-trigger" aria-expanded={open} onClick={() => setOpen(o => !o)}>
@@ -114,13 +112,15 @@ function FooterAccordion({ title, links }: { title: string; links: [string, stri
         <ChevronDown className="footer-accordion-icon" aria-hidden="true" />
       </button>
       <div className="footer-accordion-panel" style={{ gridTemplateRows: open ? '1fr' : '0fr' }}>
-        <div className="footer-accordion-inner">{links.map(([l, h]) => <Link key={h} href={h} className="footer-link"><span>{l}</span><ArrowUpRight aria-hidden="true" /></Link>)}</div>
+        <div className="footer-accordion-inner">{links.map(([l, h]) => /^(mailto:|https?:|#)/.test(h)
+          ? <a key={h} href={h} className="footer-link" {...(h === '#' ? { onClick: (e: React.MouseEvent) => e.preventDefault(), 'aria-label': `${l} placeholder` } : {})}><span>{l}</span><ArrowUpRight aria-hidden="true" /></a>
+          : <Link key={h} href={h} className="footer-link"><span>{l}</span><ArrowUpRight aria-hidden="true" /></Link>)}</div>
       </div>
     </div>
   )
 }
 
-export function Footer() { return <footer className="footer"><div className="shell"><div className="grid gap-10 border-b border-border pb-10 md:grid-cols-[1.5fr_repeat(3,1fr)]"><div className="footer-brand"><Logo /><p className="mt-4 max-w-xs text-sm text-muted-foreground">Move fast. Ship better. Senior engineering for ambitious teams.</p></div><FooterAccordion title="Company" links={[['About', '/about'], ['How We Work', '/about#method'], ['Recruitment', '/recruitment'], ['Careers', '/careers'], ['Work', '/work'], ['Contact', '/contact']]} /><FooterAccordion title="Solutions" links={[['AI & Automation', '/solutions/ai-automation'], ['Software Engineering', '/solutions/software-engineering'], ['Mobile', '/solutions/mobile'], ['Cloud & DevOps', '/solutions/cloud-devops']]} /><div className="footer-col footer-connect"><p className="footer-label">Connect</p><a href="#" aria-label="LinkedIn placeholder" className="footer-link" onClick={e => e.preventDefault()}><span>LinkedIn</span><ArrowUpRight aria-hidden="true" /></a><a href="mailto:hello@nexio.ai" className="footer-link"><span>Email</span><ArrowUpRight aria-hidden="true" /></a></div></div><div className="flex flex-col items-center gap-3 pt-6 text-center text-xs text-muted-foreground md:flex-row md:items-center md:justify-between md:text-left"><span>© 2026 Nexio AI Solutions. All rights reserved.</span><span className="flex gap-5"><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms of Service</Link></span></div></div></footer> }
+export function Footer() { return <footer className="footer"><div className="shell"><div className="footer-grid grid gap-10 border-b border-border pb-10 md:grid-cols-[1.5fr_repeat(3,1fr)]"><div className="footer-brand"><Logo /><p className="mt-4 max-w-xs text-sm text-muted-foreground">Move fast. Ship better. Senior engineering for ambitious teams.</p></div><FooterAccordion title="Company" links={[['About', '/about'], ['How We Work', '/about#method'], ['Recruitment', '/recruitment'], ['Careers', '/careers'], ['Work', '/work'], ['Contact', '/contact']]} /><FooterAccordion title="Solutions" links={[['AI & Automation', '/solutions/ai-automation'], ['Software Engineering', '/solutions/software-engineering'], ['Mobile', '/solutions/mobile'], ['Cloud & DevOps', '/solutions/cloud-devops']]} /><FooterAccordion title="Connect" links={[['LinkedIn', '#'], ['Email', 'mailto:hello@nexio.ai']]} /></div><div className="flex flex-col items-center gap-3 pt-6 text-center text-xs text-muted-foreground md:flex-row md:items-center md:justify-between md:text-left"><span>© 2026 Nexio AI Solutions. All rights reserved.</span><span className="flex gap-5"><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms of Service</Link></span></div></div></footer> }
 
 export function SectionHeading({ eyebrow, title, copy, action }: { eyebrow: string; title: string; copy?: string; action?: { label: string; href: string } }) {
   const heading = <div className="max-w-3xl"><p className="eyebrow">{eyebrow}</p><h2 className="mt-4 text-balance text-[clamp(1.7rem,2.6vw,2.5rem)] font-semibold leading-[1.22] tracking-[-0.045em] text-foreground">{title}</h2>{copy && <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted-foreground">{copy}</p>}</div>
