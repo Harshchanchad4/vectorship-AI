@@ -2,10 +2,10 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Sora } from 'next/font/google'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-space-grotesk', display: 'swap' })
+const sora = Sora({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-sora', display: 'swap' })
 const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-inter', display: 'swap' })
 
 export const metadata: Metadata = {
@@ -66,7 +66,7 @@ const jsonLd = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`bg-background ${GeistSans.variable} ${GeistMono.variable} ${spaceGrotesk.variable} ${inter.variable}`}><body className="antialiased">
+  return <html lang="en" className={`bg-background ${GeistSans.variable} ${GeistMono.variable} ${sora.variable} ${inter.variable}`}><body className="antialiased">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     {children}{process.env.NODE_ENV === 'production' && <Analytics />}
   </body></html>
