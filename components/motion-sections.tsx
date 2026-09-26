@@ -72,21 +72,35 @@ export function MotionCTA({ title = 'Have a problem worth solving?', copy = 'Let
 const AUTO_MS = 5200
 type CardItem = { title: string; copy: string; href?: string; label?: string; cta?: string; points?: string[] }
 
+const capCta = (it: CardItem) => it.cta ?? (it.href ? 'Explore capability' : 'Discuss this capability')
+
 export function CapabilityShowcase({ items }: { items: CardItem[] }) {
   const reduce = useReducedMotion()
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [compact, setCompact] = useState(false)
   const count = items.length
   const item = items[active]
   const total = String(count).padStart(2, '0')
   const href = item.href ?? '/contact'
-  const cta = item.cta ?? (item.href ? 'Explore capability' : 'Discuss this capability')
+  const cta = capCta(item)
+
+  // Below the two-column breakpoint the showcase becomes a tap-to-expand
+  // accordion; suppress auto-advance there so the layout doesn't shift under
+  // the reader (there's no hover to pause it on touch).
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 860px)')
+    const sync = () => setCompact(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   useEffect(() => {
-    if (paused || reduce || count < 2) return
+    if (paused || reduce || compact || count < 2) return
     const id = setInterval(() => setActive(i => (i + 1) % count), AUTO_MS)
     return () => clearInterval(id)
-  }, [paused, reduce, count])
+  }, [paused, reduce, compact, count])
 
   return (
     <motion.div
@@ -111,6 +125,18 @@ export function CapabilityShowcase({ items }: { items: CardItem[] }) {
                 <span className="cap-tab-title">{it.title}</span>
                 <ChevronRight className="cap-tab-arrow size-4" />
               </button>
+              <div className="cap-tab-panel" data-open={isActive}>
+                <div className="cap-tab-panel-inner">
+                  <p className="eyebrow">{it.label || 'ENGINEERING CAPABILITY'}</p>
+                  <p className="cap-feature-copy">{it.copy}</p>
+                  {it.points && (
+                    <ul className="cap-feature-points">
+                      {it.points.map(point => <li key={point}><Check className="size-4" /><span>{point}</span></li>)}
+                    </ul>
+                  )}
+                  <Link href={it.href ?? '/contact'} className="card-link">{capCta(it)} <ArrowUpRight className="size-4" /></Link>
+                </div>
+              </div>
             </li>
           )
         })}
